@@ -119,10 +119,19 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Game\entity\Board.cs" />
+    <Compile Include="Game\entity\BoardCase.cs" />
+    <Compile Include="Game\entity\Hit.cs" />
+    <Compile Include="Game\entity\Player.cs" />
+    <Compile Include="Game\entity\Ship.cs" />
+    <Compile Include="Game\entity\ShipPiece.cs" />
+    <Compile Include="Game\Game.cs" />
+    <Compile Include="Game\GameRules.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\Coordonnees.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
