@@ -9,22 +9,28 @@ namespace BatailleTest.Game
     internal class GameRules
     {
         private int _nbShip;
-        private int[] _shipSize;
+        private Dictionary<String, int> _shipList = new Dictionary<String, int>();
         private int MAX_SHIP = 5;
         private int MIN_SHIP = 5;
 
         private int _mapSize;
 
 
-        public GameRules(int mapSize = 10, int nbShip = 0, int[] shipSize = null)
+        public GameRules(int mapSize = 10, int nbShip = 0, Dictionary<String, int> shipList = null)
         {
+            if (shipList == null)
+            {
+                shipList = DATA.DefaultShip.DefaultShipList;
+            }
+
+
             if (mapSize < 0)
             {
                 throw new Exception("Map size must be greater than 0");
             }
-            if (nbShip != shipSize.Length)
+            if (nbShip != shipList.Count)
             {
-                throw new Exception("Number of ship must be equal to the number of ship size");
+                throw new Exception("Number of ship must be equal to the number of ship in the ship list");
             }
             if (nbShip > MAX_SHIP || nbShip < MIN_SHIP)
             {
@@ -33,7 +39,7 @@ namespace BatailleTest.Game
 
             _mapSize = mapSize;
             _nbShip = nbShip;
-            _shipSize = shipSize;
+            _shipList = shipList;
         }
 
         public int NbShip
@@ -41,9 +47,9 @@ namespace BatailleTest.Game
             get { return _nbShip; }
         }
 
-        public int[] ShipSize
+        public Dictionary<String, int> ShipList
         {
-            get { return _shipSize; }
+            get { return _shipList; }
         }
 
         public int MapSize
@@ -51,25 +57,40 @@ namespace BatailleTest.Game
             get { return _mapSize; }
         }
 
-        public void addShip(int size)
+        public void addShip(string shipName, int size)
         {
             if (_nbShip + 1 > MAX_SHIP)
             {
                 throw new Exception("There is already " + MAX_SHIP + " ships");
             }
 
-            if (size + _shipSize.Sum() > _mapSize * _mapSize)
+            if (_shipList.ContainsKey(shipName))
+            {
+                throw new Exception("Ship name already exist");
+            }
+
+            if (_shipList.Values.Sum() + size > _mapSize * _mapSize)
             {
                 throw new Exception("The sum of all ship size must be less than the map size");
             }
 
+            if (shipName == null || shipName == "")
+            {
+                throw new Exception("Ship name must not be null or empty");
+            }
+
+            if (size < 0)
+            {
+                throw new Exception("Ship size must be greater than 0");
+            }
+
             _nbShip++;
-            _shipSize = _shipSize.Concat(new int[] { size }).ToArray();
+            _shipList.Add(shipName, size);
         }
 
         public bool areRulesValid()
         {
-            if (_nbShip != _shipSize.Length)
+            if (_nbShip != _shipList.Count)
             {
                 return false;
             }
@@ -78,7 +99,7 @@ namespace BatailleTest.Game
                 return false;
             }
 
-            if (_shipSize.Sum() > _mapSize * _mapSize)
+            if (_shipList.Values.Sum() > _mapSize * _mapSize)
             {
                 return false;
             }

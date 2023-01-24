@@ -10,7 +10,7 @@ using Windows.Media.Devices.Core;
 
 namespace BatailleTest.DATA
 {
-    internal class DefaultShip
+    static class DefaultShip
     {
         private const int CARRIER_SIZE = 5;
         private const int BATTLESHIP_SIZE = 4;
@@ -18,7 +18,7 @@ namespace BatailleTest.DATA
         private const int SUBMARINE_SIZE = 3;
         private const int DESTROYER_SIZE = 2;
 
-        private Dictionary<String, int> DefaultShipList = new Dictionary<String, int>(
+        private static Dictionary<String, int> _DefaultShipList = new Dictionary<String, int>(
             new List<KeyValuePair<String, int>>()
             {
                 new KeyValuePair<String, int>("Carrier", CARRIER_SIZE),
@@ -29,9 +29,9 @@ namespace BatailleTest.DATA
             }
         );
 
-        public Dictionary<String, int> DefaultShipListGetter
+        public static Dictionary<String, int> DefaultShipList
         {
-            get { return DefaultShipList; }
+            get { return _DefaultShipList; }
         }
     }
 }
