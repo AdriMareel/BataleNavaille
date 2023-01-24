@@ -10,8 +10,8 @@ namespace BatailleTest.Game
     {
         private int _nbShip;
         private int[] _shipSize;
-        private int MAX_SHIP = 10;
-        private int MIN_SHIP = 1;
+        private int MAX_SHIP = 5;
+        private int MIN_SHIP = 5;
 
         private int _mapSize;
 

@@ -26,7 +26,7 @@ namespace BatailleTest.Game
             _player2 = new Player("Bot");
             _currentPlayer = _player1;
             _otherPlayer = _player2;
-            _turn = 1;
+            _turn = 0;
         }
 
         public Player Player1
@@ -88,7 +88,7 @@ namespace BatailleTest.Game
         public bool AddAShip(Player player, Ship ship)
         {
             GameRules gameRules = this.GameRules;
-
+            
             if (player.AddShip(ship, GameRules))
             {
                 return true;

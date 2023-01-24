@@ -9,6 +9,7 @@ namespace BatailleTest.Game.entity
     internal class Ship
     {
         private int _size;
+        private string _name;
         private bool _isVertical;
         private utils.Coodonnees _startPosition;
         private List<ShipPiece> _shipPieces;
@@ -16,9 +17,10 @@ namespace BatailleTest.Game.entity
         private int _life;
         private bool _isAlive;
 
-        public Ship(utils.Coodonnees startPosition, int size, bool isVertical = true)
+        public Ship(utils.Coodonnees startPosition,string name , int size, bool isVertical = true)
         {
             _startPosition = startPosition;
+            _name = name;
             _size = size;
             _life = size;
             _isVertical = isVertical;
@@ -42,6 +44,11 @@ namespace BatailleTest.Game.entity
                     _shipPieces.Add(new ShipPiece(new utils.Coodonnees(_startPosition.X + i, _startPosition.Y)));
                 }
             }
+        }
+
+        public string Name
+        {
+            get { return _name; }
         }
         public bool IsAlive
         {
