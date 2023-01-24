@@ -9,7 +9,7 @@ namespace BatailleTest.Game
 {
     internal class Game
     {
-        private GameRules _gameRules = null;
+        private GameRules _gameRules;
 
         private Player _player1;
         private Player _player2;
@@ -18,9 +18,16 @@ namespace BatailleTest.Game
         private int _turn;
 
 
-        public Game(GameRules gameRules)
+        public Game(GameRules gameRules = null)
         {
-            _gameRules = gameRules;
+            if (gameRules == null)
+            {
+                _gameRules = new GameRules();
+            }
+            else
+            {
+                _gameRules = gameRules;
+            }
 
             _player1 = new Player("Player1");
             _player2 = new Player("Bot");
