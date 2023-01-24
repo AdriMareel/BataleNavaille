@@ -89,8 +89,11 @@ namespace BatailleTest.Game.entity
             return false;
         }
 
-        public bool AddShip(Ship ship)
+        public bool AddShip(Ship ship, GameRules rules)
         {
+            //todo : check if the number of ship is not greater than the number of ship allowed
+            //todo : check is the ship is not out of the board
+
             foreach (ShipPiece shipPiece in ship.ShipPieces)
             {
                 if (isAShipAt(shipPiece.Position))

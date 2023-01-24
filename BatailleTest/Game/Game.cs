@@ -9,7 +9,7 @@ namespace BatailleTest.Game
 {
     internal class Game
     {
-        private GameRules _gameRules;
+        private GameRules _gameRules = null;
 
         private Player _player1;
         private Player _player2;
@@ -87,18 +87,16 @@ namespace BatailleTest.Game
 
         public bool AddAShip(Player player, Ship ship)
         {
-            if (player.getNumberOfShip() < _gameRules.NbShip)
+            GameRules gameRules = this.GameRules;
+
+            if (player.AddShip(ship, GameRules))
             {
-                if (player.AddShip(ship))
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return true;
             }
-            return false;
+            else
+            {
+                return false;
+            }
         }
 
         public void GetBoard(Player player)
