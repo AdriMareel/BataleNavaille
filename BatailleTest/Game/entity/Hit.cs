@@ -12,6 +12,7 @@ namespace BatailleTest.Game.entity
         private bool _isShipPiece;
         private ShipPiece _shipPiece;
 
+
         public Hit(utils.Coodonnees position, bool isShipPiece = false, ShipPiece shipPiece = null)
         {
             _position = position;

@@ -9,7 +9,7 @@ namespace BatailleTest.Game
     internal class GameRules
     {
         private int _nbShip;
-        private Dictionary<String, int> _shipList = new Dictionary<String, int>();
+        private Dictionary<String, int> _shipList;
         private int MAX_SHIP = 5;
         private int MIN_SHIP = 5;
 
@@ -18,10 +18,8 @@ namespace BatailleTest.Game
 
         public GameRules(int mapSize = 10, int nbShip = 0, Dictionary<String, int> shipList = null)
         {
-            if (shipList == null)
-            {
-                shipList = DATA.DefaultShip.DefaultShipList;
-            }
+            shipList = shipList??DATA.DefaultShip.DefaultShipList;
+
 
 
             if (mapSize < 0)

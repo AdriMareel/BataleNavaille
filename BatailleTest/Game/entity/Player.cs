@@ -63,6 +63,21 @@ namespace BatailleTest.Game.entity
             return false;
         }
 
+        public int getIndexOfShipAt(utils.Coodonnees position)
+        {
+            for (int i = 0; i < _ships.Count; i++)
+            {
+                foreach (ShipPiece boatPiece in _ships[i].ShipPieces)
+                {
+                    if (boatPiece.Position.X == position.X && boatPiece.Position.Y == position.Y)
+                    {
+                        return i;
+                    }
+                }
+            }
+            return -1;
+        }
+
         public bool doesShipFit(Ship ship)
         {
             foreach (ShipPiece shipPiece in ship.ShipPieces)
@@ -118,8 +133,13 @@ namespace BatailleTest.Game.entity
         }
 
 
-        public void addShot(Hit hit)
+        public void addShot(Hit hit, GameRules rules)
         {
+            //todo : check if the number of shot is not greater than the number of shot allowed (map size)²
+            //todo : check if the shot is not out of the board
+            //todo: check if the shot is not already done
+            //todo: return  hit status (miss, hit, sunk, notValid)
+
             _playerShots.Add(hit);
         }
 

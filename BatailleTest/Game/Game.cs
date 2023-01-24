@@ -18,19 +18,12 @@ namespace BatailleTest.Game
         private int _turn;
 
 
-        public Game(GameRules gameRules = null)
+        public Game(GameRules gameRules = null, string player1Name = "Player1", string player2Name = "Player2")
         {
-            if (gameRules == null)
-            {
-                _gameRules = new GameRules();
-            }
-            else
-            {
-                _gameRules = gameRules;
-            }
+            _gameRules = gameRules ?? new GameRules();
 
-            _player1 = new Player("Player1");
-            _player2 = new Player("Bot");
+            _player1 = new Player(player1Name);
+            _player2 = new Player(player2Name);
             _currentPlayer = _player1;
             _otherPlayer = _player2;
             _turn = 0;
@@ -67,8 +60,7 @@ namespace BatailleTest.Game
         }
 
         public void Start()
-        {
-            
+        { 
 
         }
 
