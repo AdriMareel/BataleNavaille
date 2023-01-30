@@ -8,19 +8,15 @@ namespace BatailleTest.Game.entity
 {
     internal class Board
     {
-        private List<Ship> _playerOneShips;
-        private List<Hit> _playerOneShots;
+        private List<Ship> _playerShips;
+        private List<Hit> _playerShots;
 
-        private List<Ship> _playerTwoShips;
-        private List<Hit> _playerTwoShots;
 
-        public Board(Player playerOne, Player PlayerTwo)
+        public Board(Player player)
         {
-            _playerOneShips = playerOne.Ships;
-            _playerOneShots = playerOne.PlayerShots;
+            _playerShots = player.PlayerShots;
+            _playerShips = player.Ships;
 
-            _playerTwoShips = PlayerTwo.Ships;
-            _playerTwoShots = PlayerTwo.PlayerShots;
         }
     }
 }

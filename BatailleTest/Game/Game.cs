@@ -16,8 +16,9 @@ namespace BatailleTest.Game
         private Player _currentPlayer;
         private Player _otherPlayer;
 
-        private Board _board;
-        
+        private Board _playerOneBoard;
+        private Board _playerTwoBoard;
+
         private int _turn;
 
 
@@ -31,7 +32,8 @@ namespace BatailleTest.Game
             _otherPlayer = _player2;
             _turn = 0;
 
-            _board = new Board(_player1, _player2);
+            _playerOneBoard = new Board(_player1);
+            _playerTwoBoard = new Board(_player2);
         }
 
         public Player Player1
