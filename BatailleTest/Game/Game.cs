@@ -21,6 +21,10 @@ namespace BatailleTest.Game
         private Board _playerOneBoard;
         private Board _playerTwoBoard;
 
+        private utils.GameStates _gameState;
+
+
+
         private int _turn;
 
 
@@ -36,6 +40,8 @@ namespace BatailleTest.Game
 
             _playerOneBoard = new Board(_player1);
             _playerTwoBoard = new Board(_player2);
+
+            _gameState = new utils.GameStates();
         }
 
         public Player Player1
