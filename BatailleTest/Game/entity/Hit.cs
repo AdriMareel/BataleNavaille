@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace BatailleTest.Game.entity
-{
+{   
     internal class Hit
     {
         private utils.Coodonnees _position;

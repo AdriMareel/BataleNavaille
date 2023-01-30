@@ -8,20 +8,19 @@ namespace BatailleTest.Game.entity
 {
     internal class Board
     {
-        private int _size;
-        private List<List<BoardCase>> _cases;
-        public Board()
+        private List<Ship> _playerOneShips;
+        private List<Hit> _playerOneShots;
+
+        private List<Ship> _playerTwoShips;
+        private List<Hit> _playerTwoShots;
+
+        public Board(Player playerOne, Player PlayerTwo)
         {
-            _size = 10;
-            _cases = new List<List<BoardCase>>();
-            for (int i = 0; i < _size; i++)
-            {
-                _cases.Add(new List<BoardCase>());
-                for (int j = 0; j < _size; j++)
-                {
-                    //_cases[i].Add(new BoardCase(new utils.Coodonnees(i, j)));
-                }
-            }
+            _playerOneShips = playerOne.Ships;
+            _playerOneShots = playerOne.PlayerShots;
+
+            _playerTwoShips = PlayerTwo.Ships;
+            _playerTwoShots = PlayerTwo.PlayerShots;
         }
     }
 }

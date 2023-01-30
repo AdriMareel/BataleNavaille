@@ -97,10 +97,5 @@ namespace BatailleTest.Game
                 return false;
             }
         }
-
-        public void GetBoard(Player player)
-        {
-
-        }
     }
 }
