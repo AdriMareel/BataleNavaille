@@ -40,7 +40,11 @@ namespace BatailleTest
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Frame rootFrame = Window.Current.Content as Frame;
-            rootFrame.Navigate(typeof(GamePage));
+
+            List <string> names = new List<string>();
+            names.Add(namePlayer1.Text);
+            names.Add(namePlayer2.Text);
+            rootFrame.Navigate(typeof(GamePage),names);
         }
     }
 }

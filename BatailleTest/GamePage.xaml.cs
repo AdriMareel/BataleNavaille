@@ -22,9 +22,23 @@ namespace BatailleTest
     /// </summary>
     public sealed partial class GamePage : Page
     {
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            var parameters = e.Parameter;
+
+            string namePlayer1 = ((List<string>)parameters)[0];
+            string namePlayer2 = ((List<string>)parameters)[1];
+
+            this.player1Name.Text = namePlayer1;
+            this.player2Name.Text = namePlayer2;
+        }
+        
         public GamePage()
         {
             this.InitializeComponent();
+
 
             const int GRID_SIZE = 10;
             Grid gridPlayer1 = gamePlayer1;
@@ -73,6 +87,11 @@ namespace BatailleTest
             }
 
             gridPlayer2.Margin = new Thickness(1000, 0, 0, 0);
+        }
+
+        private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
