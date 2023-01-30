@@ -55,6 +55,11 @@ namespace BatailleTest.Game.entity
             get { return _isAlive; }
         }
 
+        public bool Life
+        {
+            get { return _life; }
+        }
+
         public bool IsVertical
         {
             get { return _isVertical; }

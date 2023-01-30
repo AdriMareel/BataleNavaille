@@ -110,7 +110,10 @@ namespace BatailleTest.Game
         public bool AddAShot(utils.Coordinates coordinates)
         {
             GameRules gameRules = this.GameRules;
-
+            if(_currentPlayer == _player1)
+            {
+                _currentPlayer.AddShot(coordinates,gameRules, _playerTwoBoard);
+            }
             return true;
         }
 
