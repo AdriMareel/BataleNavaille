@@ -106,6 +106,7 @@ namespace BatailleTest.Game.entity
 
         public bool AddShip(Ship ship, GameRules rules)
         {
+
             if(_ships.Count == rules.MaxShip)
             {
                 return false;

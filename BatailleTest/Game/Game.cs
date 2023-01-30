@@ -40,8 +40,6 @@ namespace BatailleTest.Game
 
             _playerOneBoard = new Board(_player1);
             _playerTwoBoard = new Board(_player2);
-
-            _gameState = new GameStates();
         }
 
         public Player Player1
@@ -122,7 +120,7 @@ namespace BatailleTest.Game
             }
             else if (_gameState.State == GameStates.States.Playing)
             {
-                //TODO call this.AddAShot(Coordinates);
+                //TODO call this.AddAShot(Coordinates); + switch player + next turn
                 // if this.isOver() then set Gamestate to end
 
             }
@@ -131,8 +129,8 @@ namespace BatailleTest.Game
                 //TODO
             }
         }
-
-        public bool AddAShip(Player player, Ship ship)
+        
+        private bool AddAShip(Player player, Ship ship)
         {
             GameRules gameRules = this.GameRules;
             
@@ -146,7 +144,7 @@ namespace BatailleTest.Game
             }
         }
 
-        public bool AddAShot(Coordinates coordinates)
+        private bool AddAShot(Coordinates coordinates)
         {
             GameRules gameRules = this.GameRules;
             if(_currentPlayer == _player1)
