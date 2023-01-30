@@ -130,12 +130,27 @@ namespace BatailleTest.Game
 
         public bool IsOver()
         {
-            return false;
+            if (this.GetWinner() != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public Player GetWinner()
         {
-            return null;
+            if (_player1.isAShipAlive() && !_player2.isAShipAlive())
+            {
+                return _player1;
+            }
+            else if (!_player1.isAShipAlive() && _player2.isAShipAlive())
+            {
+                return _player2;
+            }
+            else { return null; }
         }       
 
     }
