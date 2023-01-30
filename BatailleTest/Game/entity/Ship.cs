@@ -55,7 +55,7 @@ namespace BatailleTest.Game.entity
             get { return _isAlive; }
         }
 
-        public bool Life
+        public int Life
         {
             get { return _life; }
         }
