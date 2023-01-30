@@ -124,7 +124,6 @@
       <DependentUpon>GamePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Game\entity\Board.cs" />
-    <Compile Include="Game\entity\BoardCase.cs" />
     <Compile Include="Game\entity\Hit.cs" />
     <Compile Include="Game\entity\Player.cs" />
     <Compile Include="Game\entity\Ship.cs" />
