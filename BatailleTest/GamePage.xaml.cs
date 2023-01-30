@@ -25,6 +25,54 @@ namespace BatailleTest
         public GamePage()
         {
             this.InitializeComponent();
+
+            const int GRID_SIZE = 10;
+            Grid gridPlayer1 = gamePlayer1;
+            Grid gridPlayer2 = gamePlayer2;
+
+            for (int i = 0; i < GRID_SIZE; i++){
+                ColumnDefinition c = new ColumnDefinition();
+                c.Width = new GridLength(50, GridUnitType.Pixel);
+                gridPlayer1.ColumnDefinitions.Add(c);
+
+                RowDefinition r = new RowDefinition();
+                r.Height = new GridLength(50, GridUnitType.Pixel);
+                gridPlayer1.RowDefinitions.Add(r);
+            }
+
+            for (int i = 0; i < GRID_SIZE; i++)
+            {
+                ColumnDefinition c = new ColumnDefinition();
+                c.Width = new GridLength(50, GridUnitType.Pixel);
+                gridPlayer2.ColumnDefinitions.Add(c);
+
+                RowDefinition r = new RowDefinition();
+                r.Height = new GridLength(50, GridUnitType.Pixel);
+                gridPlayer2.RowDefinitions.Add(r);
+            }
+
+            for (int i = 0; i < GRID_SIZE; i++)
+            {
+                for(int y = 0; y < GRID_SIZE; y++) {
+                    Border border = new Border();
+                    border.BorderBrush = new SolidColorBrush(Windows.UI.Colors.White);
+                    border.BorderThickness = new Thickness(1);
+                    border.SetValue(Grid.ColumnProperty, i);
+                    border.SetValue(Grid.RowProperty, y);
+                    gridPlayer1.Children.Add(border);
+
+                    Border border2 = new Border();
+                    border2.BorderBrush = new SolidColorBrush(Windows.UI.Colors.White);
+                    border2.BorderThickness = new Thickness(1);
+                    border2.SetValue(Grid.ColumnProperty, i);
+                    border2.SetValue(Grid.RowProperty, y);
+                    gridPlayer2.Children.Add(border2);
+
+
+                }
+            }
+
+            gridPlayer2.Margin = new Thickness(1000, 0, 0, 0);
         }
     }
 }
