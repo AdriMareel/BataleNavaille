@@ -148,7 +148,7 @@ namespace BatailleTest.Game
             }
             else if (!_player1.isAShipAlive() && _player2.isAShipAlive())
             {
-                return _player2;
+                return _player2;    
             }
             else { return null; }
         }       
