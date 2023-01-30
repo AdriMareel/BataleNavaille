@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BatailleTest.utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -134,26 +135,55 @@ namespace BatailleTest.Game.entity
         }
 
 
-        public string AddShot(Hit hit, GameRules rules, Board ennemyBoard)
+        public string AddShot(Coordinates coords, GameRules rules, Board ennemyBoard)
         {
-            //todo : check if the number of shot is not greater than the number of shot allowed (map size)²
+
+            //check if the number of shot is not greater than the number of shot allowed (map size)²
             if(_playerShots.Count >= (rules.MapSize^2))
             {
                 return "notValid";
             }
-            //todo : check if the shot is not out of the board
-            if(hit.Position.X < 0 || hit.Position.Y < 0 || hit.Position.X >= rules.MapSize || hit.Position.Y >= rules.MapSize)
+            //check if the shot is not out of the board
+            if(coords.X < 0 || coords.Y < 0 || coords.X >= rules.MapSize || coords.Y >= rules.MapSize)
             {
                 return "notValid";
             }
-            //todo: check if the shot is not already done
-            if (_playerShots.Contains(hit)){
-                return "notValid";
+            //check if the shot is not already done
+            foreach(Hit hitTmp in _playerShots)
+            {
+                if(hitTmp.Position == coords)
+                {
+                    return "notValid";
+                }
             }
-            //todo: return  hit status (miss, hit, sunk, notValid)
 
+            //check if shot is landed or not and if it sunk a full ship
+            var status = "";
+            foreach (Ship ship in ennemyBoard.PlayerShips)
+            {
+                foreach(ShipPiece piece in ship.ShipPieces)
+                {
+                    if(coords == piece.Position)
+                    {
+                        if(ship.Life == 1)
+                        {
+                            status = "sunk";
+                        }
+                        else
+                        {
+                            status = "hit";
+                        }
+                        ship.Hit(coords);
+                    }
+                    
+                }
+            }
+            if (status == "") { status = "miss"; }
+
+            Hit hit = new Hit(coords, status);
             _playerShots.Add(hit);
-            return "hit";
+
+            return status;
         }
 
     }
