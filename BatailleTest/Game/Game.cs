@@ -112,8 +112,19 @@ namespace BatailleTest.Game
             GameRules gameRules = this.GameRules;
             if(_currentPlayer == _player1)
             {
-                _currentPlayer.AddShot(coordinates,gameRules, _playerTwoBoard);
+                if(_currentPlayer.AddShot(coordinates,gameRules, _playerTwoBoard) == "notValid")
+                {
+                    return false;
+                }
             }
+            else if(_currentPlayer == _player2)
+            {
+                if(_currentPlayer.AddShot(coordinates,gameRules,_playerOneBoard) == "notValid")
+                {
+                    return false;
+                }
+            }
+            else { return false; }
             return true;
         }
 
