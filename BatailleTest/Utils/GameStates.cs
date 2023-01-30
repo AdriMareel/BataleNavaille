@@ -20,7 +20,7 @@ namespace BatailleTest.utils
 
         private States _state;
 
-        public GameStates(States state)
+        public GameStates(States state = States.Warmup)
         {
             _state = state;
         }

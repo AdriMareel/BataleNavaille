@@ -38,5 +38,25 @@ namespace BatailleTest.utils
             return !(c1 == c2);
         }
 
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            Coordinates c = obj as Coordinates;
+            if ((System.Object)c == null)
+            {
+                return false;
+            }
+
+            return (X == c.X) && (Y == c.Y);
+        }
+
+        public override int GetHashCode()
+        {
+            return X ^ Y;
+        }
     }
 }

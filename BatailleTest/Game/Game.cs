@@ -118,10 +118,12 @@ namespace BatailleTest.Game
             if (_gameState.State == GameStates.States.Warmup)
             {
                 //TODO call this.AddAShip(coordinates, player);
-                // if tous les joueurs ont tous leurs ships 
+                // if tous les joueurs ont tous leurs ships set gamestate to playing
             }
             else if (_gameState.State == GameStates.States.Playing)
             {
+                //TODO call this.AddAShot(Coordinates);
+                // if this.isOver() then set Gamestate to end
 
             }
             else if (_gameState.State == GameStates.States.End)
