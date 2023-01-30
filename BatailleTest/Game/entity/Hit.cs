@@ -11,13 +11,15 @@ namespace BatailleTest.Game.entity
         private utils.Coodonnees _position;
         private bool _isShipPiece;
         private ShipPiece _shipPiece;
+        private string _status;
 
 
-        public Hit(utils.Coodonnees position, bool isShipPiece = false, ShipPiece shipPiece = null)
+        public Hit(utils.Coodonnees position, string status,bool isShipPiece = false, ShipPiece shipPiece = null)
         {
             _position = position;
             _isShipPiece = isShipPiece;
             _shipPiece = shipPiece;
+            _status = status;
         }
 
         public utils.Coodonnees Position
@@ -33,6 +35,11 @@ namespace BatailleTest.Game.entity
         public ShipPiece ShipPiece
         {
             get { return _shipPiece; }
+        }
+
+        public string Status
+        {
+            get { return _status; }
         }
 
     }
