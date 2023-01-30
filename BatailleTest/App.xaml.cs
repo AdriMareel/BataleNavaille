@@ -52,7 +52,7 @@ namespace BatailleTest
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
-                    //TODO: chargez l'état de l'application précédemment suspendue
+                    //TODO: chargez l'état de l'application précédemment suspendue+
                 }
 
                 // Placez le frame dans la fenêtre active
