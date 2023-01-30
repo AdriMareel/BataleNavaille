@@ -115,7 +115,7 @@ namespace BatailleTest.Game
             
             if (_gameState.State == GameStates.States.Warmup)
             {
-                //TODO call this.AddAShip(ship, player);
+                //TODO call this.AddAShip(player); /!\ pour l 'instant ca va pas marcher car il faut que je fasse un truc pour savoir quel bateau est a etre placé
                 // if tous les joueurs ont tous leurs ships set gamestate to playing
             }
             else if (_gameState.State == GameStates.States.Playing)
