@@ -95,6 +95,43 @@ namespace BatailleTest.Game.entity
                 }
             }
         }
+        public static bool operator ==(Ship ship1, Ship ship2)
+        {
+            if (ship1.Size == ship2.Size && ship1.Name == ship2.Name)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static bool operator !=(Ship ship1, Ship ship2)
+        {
+            return !(ship1 == ship2);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            Ship ship = obj as Ship;
+            if ((System.Object)ship == null)
+            {
+                return false;
+            }
+
+            return (this == ship);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
 
     }
 }
