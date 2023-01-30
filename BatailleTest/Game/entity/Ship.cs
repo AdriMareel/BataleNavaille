@@ -11,13 +11,13 @@ namespace BatailleTest.Game.entity
         private int _size;
         private string _name;
         private bool _isVertical;
-        private utils.Coodonnees _startPosition;
+        private utils.Coordinates _startPosition;
         private List<ShipPiece> _shipPieces;
 
         private int _life;
         private bool _isAlive;
 
-        public Ship(utils.Coodonnees startPosition,string name , int size, bool isVertical = true)
+        public Ship(utils.Coordinates startPosition,string name , int size, bool isVertical = true)
         {
             _startPosition = startPosition;
             _name = name;
@@ -37,11 +37,11 @@ namespace BatailleTest.Game.entity
             {
                 if (_isVertical)
                 {
-                    _shipPieces.Add(new ShipPiece(new utils.Coodonnees(_startPosition.X, _startPosition.Y + i)));
+                    _shipPieces.Add(new ShipPiece(new utils.Coordinates(_startPosition.X, _startPosition.Y + i)));
                 }
                 else
                 {
-                    _shipPieces.Add(new ShipPiece(new utils.Coodonnees(_startPosition.X + i, _startPosition.Y)));
+                    _shipPieces.Add(new ShipPiece(new utils.Coordinates(_startPosition.X + i, _startPosition.Y)));
                 }
             }
         }
@@ -65,7 +65,7 @@ namespace BatailleTest.Game.entity
             get { return _size; }
         }
 
-        public utils.Coodonnees StartPosition
+        public utils.Coordinates StartPosition
         {
             get { return _startPosition; }
         }
@@ -75,7 +75,7 @@ namespace BatailleTest.Game.entity
             get { return _shipPieces; }
         }
 
-        public void Hit(utils.Coodonnees position)
+        public void Hit(utils.Coordinates position)
         {
             foreach (ShipPiece boatPiece in _shipPieces)
             {

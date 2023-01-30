@@ -8,10 +8,10 @@ namespace BatailleTest.Game.entity
 {
     internal class ShipPiece
     {
-        private utils.Coodonnees _position;
+        private utils.Coordinates _position;
         private bool _isHit;
 
-        public ShipPiece(utils.Coodonnees position)
+        public ShipPiece(utils.Coordinates position)
         {
             _position = position;
             _isHit = false;
@@ -23,7 +23,7 @@ namespace BatailleTest.Game.entity
             set { _isHit = value; }
         }
 
-        public utils.Coodonnees Position
+        public utils.Coordinates Position
         {
             get { return _position; }
 

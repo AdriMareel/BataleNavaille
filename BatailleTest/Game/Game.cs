@@ -1,6 +1,8 @@
 ﻿using BatailleTest.Game.entity;
+using BatailleTest.utils;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -104,5 +106,13 @@ namespace BatailleTest.Game
                 return false;
             }
         }
+
+        public bool AddAShot(utils.Coordinates coordinates)
+        {
+            GameRules gameRules = this.GameRules;
+
+            return true;
+        }
+
     }
 }

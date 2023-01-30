@@ -48,7 +48,7 @@ namespace BatailleTest.Game.entity
             get { return _playerShots; }
         }
 
-        public bool isAShipAt(utils.Coodonnees position)
+        public bool isAShipAt(utils.Coordinates position)
         {
             foreach (Ship ship in _ships)
             {
@@ -63,7 +63,7 @@ namespace BatailleTest.Game.entity
             return false;
         }
 
-        public int getIndexOfShipAt(utils.Coodonnees position)
+        public int getIndexOfShipAt(utils.Coordinates position)
         {
             for (int i = 0; i < _ships.Count; i++)
             {
@@ -121,7 +121,7 @@ namespace BatailleTest.Game.entity
             return true;
         }
 
-        public bool isAShotAt(utils.Coodonnees position)
+        public bool isAShotAt(utils.Coordinates position)
         {
             foreach (Hit hit in _playerShots)
             {
@@ -134,26 +134,26 @@ namespace BatailleTest.Game.entity
         }
 
 
-        public void addShot(Hit hit, GameRules rules)
+        public string AddShot(Hit hit, GameRules rules, Board ennemyBoard)
         {
             //todo : check if the number of shot is not greater than the number of shot allowed (map size)²
             if(_playerShots.Count >= (rules.MapSize^2))
             {
-                return;
+                return "notValid";
             }
             //todo : check if the shot is not out of the board
             if(hit.Position.X < 0 || hit.Position.Y < 0 || hit.Position.X >= rules.MapSize || hit.Position.Y >= rules.MapSize)
             {
-                return;
+                return "notValid";
             }
             //todo: check if the shot is not already done
             if (_playerShots.Contains(hit)){
-                return;
+                return "notValid";
             }
             //todo: return  hit status (miss, hit, sunk, notValid)
 
             _playerShots.Add(hit);
-            return;
+            return "hit";
         }
 
     }

@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace BatailleTest.utils
 {
-    internal class Coodonnees
+    internal class Coordinates
     {
         private int _x;
         private int _y;
-        public Coodonnees(int x = 0, int y = 0)
+        public Coordinates(int x = 0, int y = 0)
         {
             _x = x;
             _y = y;
