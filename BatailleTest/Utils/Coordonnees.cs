@@ -28,6 +28,15 @@ namespace BatailleTest.utils
             set { _y = value; }
         }
 
+        public static bool operator ==(Coordinates c1, Coordinates c2)
+        {
+            return c1.X == c2.X && c1.Y == c2.Y;
+        }
+
+        public static bool operator !=(Coordinates c1, Coordinates c2)
+        {
+            return !(c1 == c2);
+        }
 
     }
 }
