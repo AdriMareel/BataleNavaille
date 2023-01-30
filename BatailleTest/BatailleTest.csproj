@@ -119,6 +119,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DATA\DefaultShip.cs" />
     <Compile Include="Game\entity\Board.cs" />
     <Compile Include="Game\entity\BoardCase.cs" />
     <Compile Include="Game\entity\Hit.cs" />
