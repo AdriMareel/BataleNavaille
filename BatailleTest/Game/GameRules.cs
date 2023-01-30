@@ -45,6 +45,11 @@ namespace BatailleTest.Game
             get { return _nbShip; }
         }
 
+        public int MaxShip
+        {
+            get { return MAX_SHIP; }
+        }
+
         public Dictionary<String, int> ShipList
         {
             get { return _shipList; }

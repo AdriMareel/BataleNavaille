@@ -78,13 +78,12 @@ namespace BatailleTest.Game.entity
             return -1;
         }
 
-        public bool doesShipFit(Ship ship)
+        public bool doesShipFit(Ship ship, GameRules rules)
         {
             foreach (ShipPiece shipPiece in ship.ShipPieces)
             {
-                //TODO : change tmpSize to the game's board size
-                var tmpSize = 10;
-                if (shipPiece.Position.X > tmpSize || shipPiece.Position.Y > tmpSize || shipPiece.Position.X < 0 || shipPiece.Position.Y < 0)
+                var boardSize = rules.MapSize;
+                if (shipPiece.Position.X > boardSize || shipPiece.Position.Y > boardSize || shipPiece.Position.X < 0 || shipPiece.Position.Y < 0)
                 {
                     return false;
                 }
@@ -106,12 +105,14 @@ namespace BatailleTest.Game.entity
 
         public bool AddShip(Ship ship, GameRules rules)
         {
-            //todo : check if the number of ship is not greater than the number of ship allowed
-            //todo : check is the ship is not out of the board
-
+            if(_ships.Count == rules.MaxShip)
+            {
+                return false;
+            }
+            
             foreach (ShipPiece shipPiece in ship.ShipPieces)
             {
-                if (isAShipAt(shipPiece.Position))
+                if (isAShipAt(shipPiece.Position) || doesShipFit(ship, rules))
                 {
                     return false;
                 }
@@ -136,11 +137,23 @@ namespace BatailleTest.Game.entity
         public void addShot(Hit hit, GameRules rules)
         {
             //todo : check if the number of shot is not greater than the number of shot allowed (map size)²
+            if(_playerShots.Count >= (rules.MapSize^2))
+            {
+                return;
+            }
             //todo : check if the shot is not out of the board
+            if(hit.Position.X < 0 || hit.Position.Y < 0 || hit.Position.X >= rules.MapSize || hit.Position.Y >= rules.MapSize)
+            {
+                return;
+            }
             //todo: check if the shot is not already done
+            if (_playerShots.Contains(hit)){
+                return;
+            }
             //todo: return  hit status (miss, hit, sunk, notValid)
 
             _playerShots.Add(hit);
+            return;
         }
 
     }
