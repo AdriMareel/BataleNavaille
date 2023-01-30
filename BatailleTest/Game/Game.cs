@@ -69,8 +69,8 @@ namespace BatailleTest.Game
         }
 
         public void Start()
-        { 
-
+        {
+            //TODO
         }
 
         private void SwitchPlayer()
@@ -127,6 +127,16 @@ namespace BatailleTest.Game
             else { return false; }
             return true;
         }
+
+        public bool IsOver()
+        {
+            return false;
+        }
+
+        public Player GetWinner()
+        {
+            return null;
+        }       
 
     }
 }
