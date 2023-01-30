@@ -18,5 +18,15 @@ namespace BatailleTest.Game.entity
             _playerShips = player.Ships;
 
         }
+
+        public List<Ship> PlayerShips
+        {
+            get { return _playerShips; }
+        }
+
+        public List<Hit> PlayerShots
+        {
+            get { return _playerShots; }
+        }
     }
 }
