@@ -7,50 +7,28 @@ using System.Threading.Tasks;
 namespace BatailleTest.utils
 {
     //Add a type string that can only be egal to (warmup, playing, end)
+
     internal class GameStates
     {
-        private string _state;
-
-        public GameStates(string state = "warmup")
+        public enum States
         {
-            if (state == "warmup" || state == "playing" || state == "end")
-            {
-                _state = state;
-            }
-            else
-            {
-                throw new Exception("Invalid state");
-            }
+            Warmup,
+            Playing,
+            End,
         }
 
-        public string State
+
+        private States _state;
+
+        public GameStates(States state)
+        {
+            _state = state;
+        }
+
+        public States State
         {
             get { return _state; }
-        }
-
-        public void setWarmup()
-        {
-            _state = "warmup";
-        }
-
-        public void setPlaying()
-        {
-            _state = "playing";
-        }
-
-        public void setEnd()
-        {
-            _state = "end";
-        }
-
-        public static bool operator ==(GameStates g1, GameStates g2)
-        {
-            return g1.State == g2.State;
-        }
-
-        public static bool operator !=(GameStates g1, GameStates g2)
-        {
-            return !(g1 == g2);
+            set { _state = value; }
         }
 
     }

@@ -21,7 +21,7 @@ namespace BatailleTest.Game
         private Board _playerOneBoard;
         private Board _playerTwoBoard;
 
-        private utils.GameStates _gameState;
+        private GameStates _gameState;
 
 
 
@@ -41,7 +41,7 @@ namespace BatailleTest.Game
             _playerOneBoard = new Board(_player1);
             _playerTwoBoard = new Board(_player2);
 
-            _gameState = new utils.GameStates();
+            _gameState = new GameStates();
         }
 
         public Player Player1
@@ -74,6 +74,16 @@ namespace BatailleTest.Game
             get { return _otherPlayer; }
         }
 
+        public Board PlayerOneBoard
+        {
+            get { return _playerOneBoard; }
+        }
+
+        public Board PlayerTwoBoard
+        {
+            get { return _playerTwoBoard; }
+        }
+
         public void Start()
         {
             //TODO
@@ -99,6 +109,27 @@ namespace BatailleTest.Game
             SwitchPlayer();
         }
 
+        public void PlayTurn(Coordinates coordinates, Player player = null)
+        {
+            if (player == null)
+                player = _currentPlayer;
+            
+            
+            if (_gameState.State == GameStates.States.Warmup)
+            {
+                //TODO call this.AddAShip(coordinates, player);
+                // if tous les joueurs ont tous leurs ships 
+            }
+            else if (_gameState.State == GameStates.States.Playing)
+            {
+
+            }
+            else if (_gameState.State == GameStates.States.End)
+            {
+                //TODO
+            }
+        }
+
         public bool AddAShip(Player player, Ship ship)
         {
             GameRules gameRules = this.GameRules;
@@ -113,7 +144,7 @@ namespace BatailleTest.Game
             }
         }
 
-        public bool AddAShot(utils.Coordinates coordinates)
+        public bool AddAShot(Coordinates coordinates)
         {
             GameRules gameRules = this.GameRules;
             if(_currentPlayer == _player1)
