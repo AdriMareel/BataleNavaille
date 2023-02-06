@@ -28,7 +28,7 @@ namespace BatailleTest.Game
         private int _turn;
 
 
-        public Game(GameRules gameRules = null, string player1Name = "Player1", string player2Name = "Player2")
+        public Game(string player1Name = "Player1", string player2Name = "Player2", GameRules gameRules = null)
         {
             _gameRules = gameRules ?? new GameRules();
 
@@ -115,6 +115,7 @@ namespace BatailleTest.Game
             
             if (_gameState.State == GameStates.States.Warmup)
             {
+                
                 //TODO call this.AddAShip(player); /!\ pour l 'instant ca va pas marcher car il faut que je fasse un truc pour savoir quel bateau est a etre placé
                 // if tous les joueurs ont tous leurs ships set gamestate to playing
             }
