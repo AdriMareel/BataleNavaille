@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.Devices.Display.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -41,7 +42,7 @@ namespace BatailleTest
         public GamePage()
         {
             this.InitializeComponent();
-
+            const int GRID_SIZE = 10;
             Game.Game game = new Game.Game(player1Name : this.player1Name.Text, player2Name : this.player2Name.Text);
             Game.GameRules gameRules = game.GameRules;
             Game.entity.Player player1 = game.Player1;
@@ -54,6 +55,8 @@ namespace BatailleTest
 
             TextBlock tb = new TextBlock();
 
+            bool[,] botBoatsCoords = new bool[GRID_SIZE,GRID_SIZE];
+
             foreach (var ship in player2.Ships)
             {
                 foreach (ShipPiece shipPiece in ship.ShipPieces)
@@ -61,18 +64,18 @@ namespace BatailleTest
                 tb.Text += shipPiece.Position.X.ToString();
                 tb.Text += " ";
                 tb.Text += shipPiece.Position.Y.ToString();
-                tb.Text += " - ";   
+                tb.Text += " - ";
+                botBoatsCoords[shipPiece.Position.Y, shipPiece.Position.X] = true;
                 }
                 tb.Text += "___";
             }
             console.Child = tb;
-            Debug.WriteLine(player2.Ships.Count);
-            
-            
 
-            const int GRID_SIZE = 10;
+            
             Grid gridPlayer1 = gamePlayer1;
             Grid gridPlayer2 = gamePlayer2;
+
+            gridPlayer2.Margin = new Thickness(1000,0,0,0);
 
             //créations des grilles pour l'interface en fonction de la GRID_SIZE choisie pour le joueur 
             for (int i = 0; i < GRID_SIZE; i++){
@@ -103,16 +106,23 @@ namespace BatailleTest
                     //ajout des borders aux grids 
                     Border border = new Border();
                     border.BorderBrush = new SolidColorBrush(Windows.UI.Colors.White);
-                    border.BorderThickness = new Thickness(1);
+                    border.BorderThickness = new Thickness(0.5);
                     border.SetValue(Grid.ColumnProperty, b);
                     border.SetValue(Grid.RowProperty, a);
                     gridPlayer1.Children.Add(border);
 
                     Border border2 = new Border();
                     border2.BorderBrush = new SolidColorBrush(Windows.UI.Colors.White);
-                    border2.BorderThickness = new Thickness(1);
+                    border2.BorderThickness = new Thickness(0.5);
                     border2.SetValue(Grid.ColumnProperty, b);
                     border2.SetValue(Grid.RowProperty, a);
+
+                    if (botBoatsCoords[a,b])
+                    {
+                        border2.Background = new SolidColorBrush(Windows.UI.Colors.Red);
+                        border2.CornerRadius = new CornerRadius(10);
+                    }
+
                     gridPlayer2.Children.Add(border2);
 
                     border.PointerEntered += Grid_PointerEntered;
