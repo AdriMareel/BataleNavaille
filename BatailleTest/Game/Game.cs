@@ -42,6 +42,8 @@ namespace BatailleTest.Game
 
             _playerOneBoard = new Board(_player1);
             _playerTwoBoard = new Board(_player2);
+
+            _gameState = new GameStates(GameStates.States.Warmup);
         }
 
         public Player Player1
