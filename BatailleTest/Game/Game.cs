@@ -113,71 +113,76 @@ namespace BatailleTest.Game
         {
             if (player == null)
                 player = _currentPlayer;
-            
-            
-            if (_gameState.State == GameStates.States.Warmup)
+
+            try
             {
-                if(player.GetMissingBoat(_gameRules).Count != 0)
-                {
-                    Ship shipToPlace = player.GetMissingBoat(_gameRules).First();
-    
-                    this.AddAShip(player, shipToPlace);
-                }
 
 
-                if(Player1.GetMissingBoat(_gameRules).Count == 0 && Player2.GetMissingBoat(_gameRules).Count == 0)
+                if (_gameState.State == GameStates.States.Warmup)
                 {
-                    _gameState.State = GameStates.States.Playing;
-                    return 0;
-                }
-                else
-                {
-                    return 1;
-                }
-
-            }
-            else if (_gameState.State == GameStates.States.Playing)
-            {
-                //TODO call this.AddAShot(Coordinates); + switch player + next turn
-                // if this.isOver() then set Gamestate to end
-
-                if(player == _currentPlayer)
-                {
-                    if (this.AddAShot(coordinates))
+                    if (player.GetMissingBoat(_gameRules).Count != 0)
                     {
-                        this.SwitchPlayer();
-                        this.NextTurn();
+                        Ship shipToPlace = player.GetMissingBoat(_gameRules).First();
+
+                        this.AddAShip(player, shipToPlace);
+                    }
+
+
+                    if (Player1.GetMissingBoat(_gameRules).Count == 0 && Player2.GetMissingBoat(_gameRules).Count == 0)
+                    {
+                        _gameState.State = GameStates.States.Playing;
+                        return 0;
                     }
                     else
                     {
-                        return 10;
+                        return 1;
                     }
-                }
-                else
-                {
-                    return 1;
-                }
 
-                if (this.IsOver())
+                }
+                else if (_gameState.State == GameStates.States.Playing)
                 {
-                    _gameState.State = GameStates.States.End;
+                    if (player == _currentPlayer)
+                    {
+                        if (this.AddAShot(coordinates))
+                        {
+                            this.SwitchPlayer();
+                            this.NextTurn();
+                        }
+                        else
+                        {
+                            return 10;
+                        }
+                    }
+                    else
+                    {
+                        return 1;
+                    }
+
+                    if (this.IsOver())
+                    {
+                        _gameState.State = GameStates.States.End;
+                        return 0;
+                    }
+                    else
+                    {
+                        return 0;
+                    }
+
+                }
+                else if (_gameState.State == GameStates.States.End)
+                {
+                    //TODO
                     return 0;
                 }
                 else
                 {
-                    return 0;
+                    new Exception("The Current Game State is not a possible state");
+                    return 100;
                 }
-
             }
-            else if (_gameState.State == GameStates.States.End)
+            catch (Exception e)
             {
-                //TODO
-                return 0;
-            }
-            else
-            {
-                new Exception("The Current Game State is not a possible state");
-                return 100;
+                throw e;
             }
         }
         
