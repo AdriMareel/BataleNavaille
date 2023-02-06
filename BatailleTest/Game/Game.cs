@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Documents;
 
 namespace BatailleTest.Game
 {
@@ -115,9 +116,22 @@ namespace BatailleTest.Game
             
             if (_gameState.State == GameStates.States.Warmup)
             {
-                
-                //TODO call this.AddAShip(player); /!\ pour l 'instant ca va pas marcher car il faut que je fasse un truc pour savoir quel bateau est a etre placé
+                if(player.GetMissingBoat(_gameRules).Count != 0)
+                {
+                    Ship shipToPlace = player.GetMissingBoat(_gameRules).First();
+    
+                    this.AddAShip(player, shipToPlace);
+                }
+
+
+                //else
+
                 // if tous les joueurs ont tous leurs ships set gamestate to playing
+                if(Player1.GetMissingBoat(_gameRules).Count == 0 && Player2.GetMissingBoat(_gameRules).Count == 0)
+                {
+                    _gameState.State = GameStates.States.Playing;
+                }
+
             }
             else if (_gameState.State == GameStates.States.Playing)
             {
