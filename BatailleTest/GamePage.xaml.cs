@@ -56,10 +56,14 @@ namespace BatailleTest
 
             foreach (var ship in player2.Ships)
             {
-                tb.Text += ship.StartPosition.X.ToString();
+                foreach (ShipPiece shipPiece in ship.ShipPieces)
+                {
+                tb.Text += shipPiece.Position.X.ToString();
                 tb.Text += " ";
-                tb.Text += ship.StartPosition.Y.ToString();
-                tb.Text += " ----- ";
+                tb.Text += shipPiece.Position.Y.ToString();
+                tb.Text += " - ";   
+                }
+                tb.Text += "___";
             }
             console.Child = tb;
             Debug.WriteLine(player2.Ships.Count);

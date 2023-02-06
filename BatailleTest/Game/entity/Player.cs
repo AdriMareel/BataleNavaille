@@ -164,13 +164,13 @@ namespace BatailleTest.Game.entity
         public string RandomShips(GameRules rules)
         {
             List<Ship> missing = GetMissingBoat(rules);
-            Coordinates randCoords = new Coordinates();
             Random r = new Random();
             bool randDir = false;
             const int SAFETY_LIMIT = 10;
             int iterator = 0;
             foreach (Ship ship in missing)
             {
+                Coordinates randCoords = new Coordinates();
                 randCoords.Randomize(0,rules.MapSize);
                 randDir = r.NextDouble() >= 0.5;
                 ship.StartPosition = randCoords;
