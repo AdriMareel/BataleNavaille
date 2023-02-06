@@ -165,17 +165,23 @@ namespace BatailleTest.Game.entity
         {
             List<Ship> missing = GetMissingBoat(rules);
             Coordinates randCoords = new Coordinates();
+            Random r = new Random();
+            bool randDir = false;
             const int SAFETY_LIMIT = 10;
             int iterator = 0;
             foreach (Ship ship in missing)
             {
-                randCoords = RandomCoordinates(rules.MapSize);
+                randCoords.Randomize(0,rules.MapSize);
+                randDir = r.NextDouble() >= 0.5;
                 ship.StartPosition = randCoords;
+                ship.IsVertical = randDir;
                 
                 while (!AddShip(ship, rules))
                 {
-                    randCoords = RandomCoordinates(rules.MapSize);
+                    randCoords.Randomize(0, rules.MapSize);
+                    randDir = r.NextDouble() >= 0.5;
                     ship.StartPosition = randCoords;
+                    ship.IsVertical = randDir;
 
                     Console.WriteLine("oops, ship no fit");
                     new Exception("Ship does not fit");
@@ -190,14 +196,6 @@ namespace BatailleTest.Game.entity
             return "ok";
         }
 
-        public Coordinates RandomCoordinates(int size)
-        {
-            Coordinates tmp = new Coordinates();
-            Random r = new Random();
-            tmp.X = r.Next(0, size);
-            tmp.Y = r.Next(0, size);
-            return tmp;
-        }
 
         public bool isAShotAt(utils.Coordinates position)
         {
