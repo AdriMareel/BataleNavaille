@@ -161,6 +161,7 @@ namespace BatailleTest.Game
                 if (this.IsOver())
                 {
                     _gameState.State = GameStates.States.End;
+                    return 0;
                 }
                 else
                 {
@@ -171,6 +172,7 @@ namespace BatailleTest.Game
             else if (_gameState.State == GameStates.States.End)
             {
                 //TODO
+                return 0;
             }
             else
             {
