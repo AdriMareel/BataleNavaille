@@ -1,6 +1,7 @@
 ﻿using BatailleTest.utils;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -131,15 +132,26 @@ namespace BatailleTest.Game.entity
         public List<Ship> GetMissingBoat(GameRules rules)
         {
             List<Ship> missingBoat = new List<Ship>();
-            foreach (Ship ship in _ships)
-            {
-                string name = ship.Name;
 
-                if (!rules.ShipList.ContainsKey(name))
+            foreach(string shipName in rules.ShipList.Keys) 
+            {
+                bool isTheBoatMissing = true;
+
+                foreach(Ship playerShip in _ships)
                 {
-                    missingBoat.Add(ship);
+                    if(playerShip.Name == shipName)
+                    {
+                        isTheBoatMissing = false;
+                        break;
+                    }
+                }
+                if (isTheBoatMissing)
+                {
+                    missingBoat.Add(new Ship(startPosition: new Coordinates(0, 0), name: shipName, size: rules.ShipList[shipName]));
                 }
             }
+
+            Debug.WriteLine("Missing boat : " + missingBoat.Count);
             return missingBoat;
         }
 
