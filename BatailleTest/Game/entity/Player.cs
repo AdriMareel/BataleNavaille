@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Media.Playback;
 
 namespace BatailleTest.Game.entity
 {
@@ -114,10 +115,14 @@ namespace BatailleTest.Game.entity
             
             foreach (ShipPiece shipPiece in ship.ShipPieces)
             {
-                if (isAShipAt(shipPiece.Position) || doesShipFit(ship, rules))
+                if (isAShipAt(shipPiece.Position))
                 {
                     return false;
                 }
+            }
+            if (!doesShipFit(ship, rules))
+            {
+                return false;
             }
             _ships.Add(ship);
             return true;
@@ -136,6 +141,37 @@ namespace BatailleTest.Game.entity
                 }
             }
             return missingBoat;
+        }
+
+        public string RandomShips(GameRules rules)
+        {
+            List<Ship> missing = GetMissingBoat(rules);
+            Coordinates randCoords = new Coordinates();
+            const int safetyLimit = 1000;
+            int iterator = 0;
+            foreach (Ship ship in missing)
+            {
+                randCoords = RandomCoordinates(rules.MapSize);
+                ship.StartPosition = randCoords;
+                while (!AddShip(ship, rules))
+                {
+                    Console.WriteLine("oops, ship no fit");
+                    if (++iterator > safetyLimit)
+                    {
+                        return "error";
+                    }
+                }
+            }
+            return "ok";
+        }
+
+        public Coordinates RandomCoordinates(int size)
+        {
+            Coordinates tmp = new Coordinates();
+            Random r = new Random();
+            tmp.X = r.Next(0, size);
+            tmp.Y = r.Next(0, size);
+            return tmp;
         }
 
         public bool isAShotAt(utils.Coordinates position)

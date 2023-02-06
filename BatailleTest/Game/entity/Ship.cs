@@ -73,6 +73,7 @@ namespace BatailleTest.Game.entity
         public utils.Coordinates StartPosition
         {
             get { return _startPosition; }
+            set { _startPosition = value; }
         }
 
         public List<ShipPiece> ShipPieces
