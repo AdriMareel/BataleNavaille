@@ -19,7 +19,7 @@ namespace BatailleTest.Game
         public GameRules(int mapSize = 10, int? nbShip = null, Dictionary<String, int> shipList = null)
         {
             shipList = shipList??DATA.DefaultShip.DefaultShipList;
-            _nbShip = nbShip ?? DATA.DefaultShip.NumberOfShip;
+            _nbShip =  nbShip??DATA.DefaultShip.NumberOfShip;
 
 
 
@@ -37,7 +37,7 @@ namespace BatailleTest.Game
             }
 
             _mapSize = mapSize;
-            _nbShip = nbShip;
+            _nbShip = (int)nbShip;
             _shipList = shipList;
         }
 
