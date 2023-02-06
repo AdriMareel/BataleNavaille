@@ -63,6 +63,11 @@ namespace BatailleTest.Game.entity
         public bool IsVertical
         {
             get { return _isVertical; }
+            set
+            {
+                _isVertical = value;
+                generateBoatPieces();
+            }
         }
 
         public int Size
@@ -73,7 +78,11 @@ namespace BatailleTest.Game.entity
         public utils.Coordinates StartPosition
         {
             get { return _startPosition; }
-            set { _startPosition = value; }
+            set 
+            { 
+                _startPosition = value;
+                this.generateBoatPieces();
+            }
         }
 
         public List<ShipPiece> ShipPieces

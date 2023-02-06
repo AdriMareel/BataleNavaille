@@ -59,6 +59,7 @@ namespace BatailleTest.Game.entity
                 {
                     if (boatPiece.Position.X == position.X && boatPiece.Position.Y == position.Y)
                     {
+                        Debug.WriteLine("The ship " + ship.Name + " is there");
                         return true;
                     }
                 }
@@ -111,6 +112,7 @@ namespace BatailleTest.Game.entity
 
             if(_ships.Count == rules.MaxShip)
             {
+                Debug.WriteLine("There is already the good number of ship");
                 return false;
             }
             
@@ -118,13 +120,17 @@ namespace BatailleTest.Game.entity
             {
                 if (isAShipAt(shipPiece.Position))
                 {
+                    Debug.WriteLine("There is already a ship there");
                     return false;
                 }
             }
             if (!doesShipFit(ship, rules))
             {
+                Debug.WriteLine("The ship does not fit");
                 return false;
             }
+            
+            Debug.WriteLine("Add the ship " + ship.Name + " at " + ship.StartPosition.X + " " + ship.StartPosition.Y);
             _ships.Add(ship);
             return true;
         }
@@ -159,16 +165,18 @@ namespace BatailleTest.Game.entity
         {
             List<Ship> missing = GetMissingBoat(rules);
             Coordinates randCoords = new Coordinates();
-            const int SAFETY_LIMIT = 1000;
+            const int SAFETY_LIMIT = 10;
             int iterator = 0;
             foreach (Ship ship in missing)
             {
-                while (AddShip(ship, rules))
+                randCoords = RandomCoordinates(rules.MapSize);
+                ship.StartPosition = randCoords;
+                
+                while (!AddShip(ship, rules))
                 {
                     randCoords = RandomCoordinates(rules.MapSize);
                     ship.StartPosition = randCoords;
 
-                    Debug.WriteLine("Add the ship " + ship.Name + " at " + ship.StartPosition.X + " " + ship.StartPosition.Y);
                     Console.WriteLine("oops, ship no fit");
                     new Exception("Ship does not fit");
                     if (++iterator > SAFETY_LIMIT)
