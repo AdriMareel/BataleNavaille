@@ -165,22 +165,22 @@ namespace BatailleTest.Game.entity
         {
             List<Ship> missing = GetMissingBoat(rules);
             Random r = new Random();
-            bool randDir = false;
-            const int SAFETY_LIMIT = 10;
+
+            const int SAFETY_LIMIT = 1000;
             int iterator = 0;
+            
             foreach (Ship ship in missing)
             {
                 Coordinates randCoords = new Coordinates();
-                
+                bool randDir = false;
                 do
                 {
                     randCoords.Randomize(0, rules.MapSize);
-                    randDir = r.NextDouble() >= 0.5;
                     ship.StartPosition = randCoords;
+                    
+                    randDir = r.NextDouble() >= 0.5;
                     ship.IsVertical = randDir;
 
-                    Console.WriteLine("oops, ship no fit");
-                    new Exception("Ship does not fit");
                     if (++iterator > SAFETY_LIMIT)
                     {
                         new Exception("Safety limit reached");
