@@ -21,23 +21,21 @@ namespace BatailleTest.Game
             shipList = shipList??DATA.DefaultShip.DefaultShipList;
             _nbShip =  nbShip??DATA.DefaultShip.NumberOfShip;
 
-
-
             if (mapSize < 0)
             {
                 throw new Exception("Map size must be greater than 0");
             }
-            if (nbShip != shipList.Count)
+            if (_nbShip != shipList.Count)
             {
                 throw new Exception("Number of ship must be equal to the number of ship in the ship list");
             }
-            if (nbShip > MAX_SHIP || nbShip < MIN_SHIP)
+            if (_nbShip > MAX_SHIP || nbShip < MIN_SHIP)
             {
                 throw new Exception("Number of ship must be between " + MIN_SHIP + " and " + MAX_SHIP);
             }
 
             _mapSize = mapSize;
-            _nbShip = (int)nbShip;
+            _nbShip = (int)_nbShip;
             _shipList = shipList;
         }
 

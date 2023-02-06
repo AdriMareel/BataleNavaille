@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BatailleTest.Game.entity;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -39,6 +40,9 @@ namespace BatailleTest
         {
             this.InitializeComponent();
 
+            Game.Game game = new Game.Game(player1Name : this.player1Name.Text, player2Name : this.player2Name.Text);
+            Board boardPlayer1 = game.PlayerOneBoard;
+            Board boardPlayer2 = game.PlayerTwoBoard;
 
             const int GRID_SIZE = 10;
             Grid gridPlayer1 = gamePlayer1;
