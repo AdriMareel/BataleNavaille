@@ -134,5 +134,11 @@ namespace BatailleTest.Game.entity
             return base.GetHashCode();
         }
 
+        public override string ToString()
+        {
+            string result = "Ship " + _name + " of size " + _size + " at position " + _startPosition.ToString();
+            return result;
+        }
+
     }
 }
