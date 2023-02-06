@@ -171,12 +171,8 @@ namespace BatailleTest.Game.entity
             foreach (Ship ship in missing)
             {
                 Coordinates randCoords = new Coordinates();
-                randCoords.Randomize(0,rules.MapSize);
-                randDir = r.NextDouble() >= 0.5;
-                ship.StartPosition = randCoords;
-                ship.IsVertical = randDir;
                 
-                while (!AddShip(ship, rules))
+                do
                 {
                     randCoords.Randomize(0, rules.MapSize);
                     randDir = r.NextDouble() >= 0.5;
@@ -191,7 +187,7 @@ namespace BatailleTest.Game.entity
                         Debug.WriteLine("Safety limit reached");
                         return "error";
                     }
-                }
+                } while (!AddShip(ship, rules));
             }
             return "ok";
         }
