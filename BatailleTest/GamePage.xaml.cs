@@ -2,6 +2,7 @@
 using BatailleTest.Game.entity;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -53,15 +54,15 @@ namespace BatailleTest
 
             TextBlock tb = new TextBlock();
 
-            foreach (var ships in player1.Ships)
+            foreach (var ship in player2.Ships)
             {
-                tb.Text += ships.StartPosition.X.ToString();
+                tb.Text += ship.StartPosition.X.ToString();
                 tb.Text += " ";
-                tb.Text += ships.StartPosition.X.ToString();
+                tb.Text += ship.StartPosition.Y.ToString();
                 tb.Text += " ----- ";
             }
             console.Child = tb;
-            
+            Debug.WriteLine(player2.Ships.Count);
             
             
 
