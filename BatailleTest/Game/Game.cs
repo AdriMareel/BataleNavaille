@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.System;
 using Windows.UI.Xaml.Documents;
 
 namespace BatailleTest.Game
@@ -108,7 +109,7 @@ namespace BatailleTest.Game
             SwitchPlayer();
         }
 
-        public void PlayTurn(Coordinates coordinates, Player player = null)
+        public int PlayTurn(Coordinates coordinates, Player player = null)
         {
             if (player == null)
                 player = _currentPlayer;
@@ -124,12 +125,14 @@ namespace BatailleTest.Game
                 }
 
 
-                //else
-
-                // if tous les joueurs ont tous leurs ships set gamestate to playing
                 if(Player1.GetMissingBoat(_gameRules).Count == 0 && Player2.GetMissingBoat(_gameRules).Count == 0)
                 {
                     _gameState.State = GameStates.States.Playing;
+                    return 0;
+                }
+                else
+                {
+                    return 1;
                 }
 
             }
@@ -138,10 +141,41 @@ namespace BatailleTest.Game
                 //TODO call this.AddAShot(Coordinates); + switch player + next turn
                 // if this.isOver() then set Gamestate to end
 
+                if(player == _currentPlayer)
+                {
+                    if (this.AddAShot(coordinates))
+                    {
+                        this.SwitchPlayer();
+                        this.NextTurn();
+                    }
+                    else
+                    {
+                        return 10;
+                    }
+                }
+                else
+                {
+                    return 1;
+                }
+
+                if (this.IsOver())
+                {
+                    _gameState.State = GameStates.States.End;
+                }
+                else
+                {
+                    return 0;
+                }
+
             }
             else if (_gameState.State == GameStates.States.End)
             {
                 //TODO
+            }
+            else
+            {
+                new Exception("The Current Game State is not a possible state");
+                return 100;
             }
         }
         
