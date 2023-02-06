@@ -123,6 +123,21 @@ namespace BatailleTest.Game.entity
             return true;
         }
 
+        public List<Ship> GetMissingBoat(GameRules rules)
+        {
+            List<Ship> missingBoat = new List<Ship>();
+            foreach (Ship ship in _ships)
+            {
+                string name = ship.Name;
+
+                if (!rules.ShipList.ContainsKey(name))
+                {
+                    missingBoat.Add(ship);
+                }
+            }
+            return missingBoat;
+        }
+
         public bool isAShotAt(utils.Coordinates position)
         {
             foreach (Hit hit in _playerShots)
