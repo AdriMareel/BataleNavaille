@@ -63,8 +63,8 @@ namespace BatailleTest.utils
         public void Randomize(int min = 0, int max = 10)
         {
             Random rnd = new Random();
-            _x = rnd.Next(min, max);
-            _y = rnd.Next(min, max);
+            _x = rnd.Next(min, max-1);
+            _y = rnd.Next(min, max-1);
         }
     }
 }

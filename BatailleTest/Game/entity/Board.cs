@@ -38,15 +38,25 @@ namespace BatailleTest.Game.entity
             {
                 foreach (ShipPiece boatPiece in ship.ShipPieces)
                 {
-                    if(boatPiece.Position.X < 11 && boatPiece.Position.Y < 11)
+                    try
                     {
-                        board[boatPiece.Position.X, boatPiece.Position.Y] = true;
+                        if(boatPiece.Position.X <= 10 && boatPiece.Position.Y <= 10)
+                        {
+                            board[boatPiece.Position.X, boatPiece.Position.Y] = true;
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        throw e;
                     }
                 }
             }
 
+
+            Debug.WriteLine(" ABCDEFGHIJ");
             for (int i = 0; i < 10; i++)
             {
+                Debug.Write(i );
                 for (int j = 0; j < 10; j++)
                 {
                     Debug.Write((board[i, j]? "*" : "_"));
