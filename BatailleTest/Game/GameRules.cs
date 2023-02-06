@@ -18,25 +18,23 @@ namespace BatailleTest.Game
 
         public GameRules(int mapSize = 10, int? nbShip = null, Dictionary<String, int> shipList = null)
         {
-            shipList = shipList??DATA.DefaultShip.DefaultShipList;
+            _shipList = shipList??DATA.DefaultShip.DefaultShipList;
             _nbShip =  nbShip??DATA.DefaultShip.NumberOfShip;
 
             if (mapSize < 0)
             {
                 throw new Exception("Map size must be greater than 0");
             }
-            if (_nbShip != shipList.Count)
+            if (_nbShip != _shipList.Count)
             {
                 throw new Exception("Number of ship must be equal to the number of ship in the ship list");
             }
-            if (_nbShip > MAX_SHIP || nbShip < MIN_SHIP)
+            if (_nbShip > MAX_SHIP || _nbShip < MIN_SHIP)
             {
                 throw new Exception("Number of ship must be between " + MIN_SHIP + " and " + MAX_SHIP);
             }
 
             _mapSize = mapSize;
-            _nbShip = (int)_nbShip;
-            _shipList = shipList;
         }
 
         public int NbShip
