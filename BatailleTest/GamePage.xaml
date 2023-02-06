@@ -10,13 +10,19 @@
 
     <Grid>
         <Grid x:Name="gamePlayer1">
-
+            
         </Grid>
 
         <Grid x:Name="gamePlayer2">
+            
 
         </Grid>
         <TextBlock x:Name="player1Name" HorizontalAlignment="Left" Margin="392,504,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" SelectionChanged="TextBlock_SelectionChanged" Height="19"/>
         <TextBlock x:Name="player2Name" HorizontalAlignment="Left" Margin="1160,504,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" SelectionChanged="TextBlock_SelectionChanged" Height="19"/>
+        
+        <Border x:Name="console" HorizontalAlignment="Left" Height="153" Margin="372,705,0,0" VerticalAlignment="Top" Width="666"/>
+        
     </Grid>
+    
+    
 </Page>

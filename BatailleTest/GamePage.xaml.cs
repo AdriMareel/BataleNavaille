@@ -1,4 +1,5 @@
-﻿using BatailleTest.Game.entity;
+﻿using BatailleTest.Game;
+using BatailleTest.Game.entity;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -41,13 +42,34 @@ namespace BatailleTest
             this.InitializeComponent();
 
             Game.Game game = new Game.Game(player1Name : this.player1Name.Text, player2Name : this.player2Name.Text);
+            Game.GameRules gameRules = game.GameRules;
+            Game.entity.Player player1 = game.Player1;
+            Game.entity.Player player2 = game.Player2;
             Board boardPlayer1 = game.PlayerOneBoard;
             Board boardPlayer2 = game.PlayerTwoBoard;
+
+
+            player2.RandomShips(gameRules);
+
+            TextBlock tb = new TextBlock();
+
+            foreach (var ships in player1.Ships)
+            {
+                tb.Text += ships.StartPosition.X.ToString();
+                tb.Text += " ";
+                tb.Text += ships.StartPosition.X.ToString();
+                tb.Text += " ----- ";
+            }
+            console.Child = tb;
+            
+            
+            
 
             const int GRID_SIZE = 10;
             Grid gridPlayer1 = gamePlayer1;
             Grid gridPlayer2 = gamePlayer2;
 
+            //créations des grilles pour l'interface en fonction de la GRID_SIZE choisie pour le joueur 
             for (int i = 0; i < GRID_SIZE; i++){
                 ColumnDefinition c = new ColumnDefinition();
                 c.Width = new GridLength(50, GridUnitType.Pixel);
@@ -68,29 +90,46 @@ namespace BatailleTest
                 r.Height = new GridLength(50, GridUnitType.Pixel);
                 gridPlayer2.RowDefinitions.Add(r);
             }
-
-            for (int i = 0; i < GRID_SIZE; i++)
+            
+            for (int a = 0; a < GRID_SIZE; a++)
             {
-                for(int y = 0; y < GRID_SIZE; y++) {
+                for (int b = 0; b < GRID_SIZE; b++)
+                {
+                    //ajout des borders aux grids 
                     Border border = new Border();
                     border.BorderBrush = new SolidColorBrush(Windows.UI.Colors.White);
                     border.BorderThickness = new Thickness(1);
-                    border.SetValue(Grid.ColumnProperty, i);
-                    border.SetValue(Grid.RowProperty, y);
+                    border.SetValue(Grid.ColumnProperty, b);
+                    border.SetValue(Grid.RowProperty, a);
                     gridPlayer1.Children.Add(border);
 
                     Border border2 = new Border();
                     border2.BorderBrush = new SolidColorBrush(Windows.UI.Colors.White);
                     border2.BorderThickness = new Thickness(1);
-                    border2.SetValue(Grid.ColumnProperty, i);
-                    border2.SetValue(Grid.RowProperty, y);
+                    border2.SetValue(Grid.ColumnProperty, b);
+                    border2.SetValue(Grid.RowProperty, a);
                     gridPlayer2.Children.Add(border2);
 
-
+                    border.PointerEntered += Grid_PointerEntered;
+                    border.PointerExited += Grid_PointerExited;
                 }
             }
 
-            gridPlayer2.Margin = new Thickness(1000, 0, 0, 0);
+            
+        }
+
+        private void Grid_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+            Border border = sender as Border;
+            border.Background = new SolidColorBrush(Windows.UI.Colors.Green);
+            
+        }
+
+        private void Grid_PointerExited(object sender, PointerRoutedEventArgs e)
+        {
+            Border border = sender as Border;
+            border.Background = new SolidColorBrush(Windows.UI.Colors.Transparent);
+
         }
 
         private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)
