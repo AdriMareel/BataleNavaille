@@ -151,7 +151,7 @@ namespace BatailleTest.Game.entity
                 }
             }
 
-            Debug.WriteLine("Missing boat : " + missingBoat.Count);
+            Debug.WriteLine("Missing boat : " + missingBoat.Count + " for player: " + this.Name);
             return missingBoat;
         }
 
@@ -163,15 +163,18 @@ namespace BatailleTest.Game.entity
             int iterator = 0;
             foreach (Ship ship in missing)
             {
-                randCoords = RandomCoordinates(rules.MapSize);
-                ship.StartPosition = randCoords;
-                while (!AddShip(ship, rules))
+                while (AddShip(ship, rules))
                 {
+                    randCoords = RandomCoordinates(rules.MapSize);
+                    ship.StartPosition = randCoords;
+
+                    Debug.WriteLine("Add the ship " + ship.Name + " at " + ship.StartPosition.X + " " + ship.StartPosition.Y);
                     Console.WriteLine("oops, ship no fit");
                     new Exception("Ship does not fit");
                     if (++iterator > SAFETY_LIMIT)
                     {
                         new Exception("Safety limit reached");
+                        Debug.WriteLine("Safety limit reached");
                         return "error";
                     }
                 }
