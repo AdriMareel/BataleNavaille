@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.VoiceCommands;
 
 namespace BatailleTest.utils
 {
@@ -57,6 +58,13 @@ namespace BatailleTest.utils
         public override int GetHashCode()
         {
             return X ^ Y;
+        }
+
+        public void Randomize(int min = 0, int max = 10)
+        {
+            Random rnd = new Random();
+            _x = rnd.Next(min, max);
+            _y = rnd.Next(min, max);
         }
     }
 }
