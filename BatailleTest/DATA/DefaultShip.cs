@@ -33,5 +33,12 @@ namespace BatailleTest.DATA
         {
             get { return _DefaultShipList; }
         }
+
+        public static int NumberOfShip
+        {
+            get { return _DefaultShipList.Count; }
+        }
+
     }
+
 }
