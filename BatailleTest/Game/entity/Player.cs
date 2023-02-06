@@ -147,7 +147,7 @@ namespace BatailleTest.Game.entity
         {
             List<Ship> missing = GetMissingBoat(rules);
             Coordinates randCoords = new Coordinates();
-            const int safetyLimit = 1000;
+            const int SAFETY_LIMIT = 1000;
             int iterator = 0;
             foreach (Ship ship in missing)
             {
@@ -156,8 +156,10 @@ namespace BatailleTest.Game.entity
                 while (!AddShip(ship, rules))
                 {
                     Console.WriteLine("oops, ship no fit");
-                    if (++iterator > safetyLimit)
+                    new Exception("Ship does not fit");
+                    if (++iterator > SAFETY_LIMIT)
                     {
+                        new Exception("Safety limit reached");
                         return "error";
                     }
                 }
