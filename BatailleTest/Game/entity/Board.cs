@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,7 +38,10 @@ namespace BatailleTest.Game.entity
             {
                 foreach (ShipPiece boatPiece in ship.ShipPieces)
                 {
-                    board[boatPiece.Position.X, boatPiece.Position.Y] = true;
+                    if(boatPiece.Position.X < 11 && boatPiece.Position.Y < 11)
+                    {
+                        board[boatPiece.Position.X, boatPiece.Position.Y] = true;
+                    }
                 }
             }
 
@@ -45,9 +49,9 @@ namespace BatailleTest.Game.entity
             {
                 for (int j = 0; j < 10; j++)
                 {
-                    Console.Write((board[i, j]? "X" : "0"));
+                    Debug.Write((board[i, j]? "*" : "_"));
                 }
-                Console.WriteLine();
+                Debug.Write("\n");
             }
         }
     }
