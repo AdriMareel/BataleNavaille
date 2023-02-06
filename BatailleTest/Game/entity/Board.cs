@@ -28,5 +28,27 @@ namespace BatailleTest.Game.entity
         {
             get { return _playerShots; }
         }
+
+        public void DebugPlayerShipsDisplay()
+        {
+            bool[,] board = new bool[10, 10];
+
+            foreach (Ship ship in _playerShips)
+            {
+                foreach (ShipPiece boatPiece in ship.ShipPieces)
+                {
+                    board[boatPiece.Position.X, boatPiece.Position.Y] = true;
+                }
+            }
+
+            for (int i = 0; i < 10; i++)
+            {
+                for (int j = 0; j < 10; j++)
+                {
+                    Console.Write((board[i, j]? "X" : "0"));
+                }
+                Console.WriteLine();
+            }
+        }
     }
 }
