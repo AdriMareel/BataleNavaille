@@ -288,14 +288,14 @@ namespace BatailleTest.Game
             GameRules gameRules = this.GameRules;
             if(_currentPlayer == _player1)
             {
-                if(_currentPlayer.AddShot(coordinates,gameRules, _playerTwoBoard) == "notValid")
+                if(_currentPlayer.AddShot(coordinates,gameRules, _playerTwoBoard) == Hit.StatusType.notValid)
                 {
                     return false;
                 }
             }
             else if(_currentPlayer == _player2)
             {
-                if(_currentPlayer.AddShot(coordinates,gameRules,_playerOneBoard) == "notValid")
+                if(_currentPlayer.AddShot(coordinates,gameRules,_playerOneBoard) == Hit.StatusType.notValid)
                 {
                     return false;
                 }

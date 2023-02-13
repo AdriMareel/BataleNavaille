@@ -261,30 +261,30 @@ namespace BatailleTest.Game.entity
         /// <param name="rules">Règles de la partie actuelle</param>
         /// <param name="ennemyBoard">Plateau de  jeu ennemi</param>
         /// <returns>"notValid" si le tir est impossible, "miss" si tir raté, "hit" ou "sunk" si bateau ennemi touché</returns>
-        public string AddShot(Coordinates coords, GameRules rules, Board ennemyBoard)
+        public Hit.StatusType AddShot(Coordinates coords, GameRules rules, Board ennemyBoard)
         {
 
             //check if the number of shot is not greater than the number of shot allowed (map size)²
             if(_playerShots.Count >= (rules.MapSize^2))
             {
-                return "notValid";
+                return Hit.StatusType.notValid;
             }
             //check if the shot is not out of the board
             if(coords.X < 0 || coords.Y < 0 || coords.X >= rules.MapSize || coords.Y >= rules.MapSize)
             {
-                return "notValid";
+                return Hit.StatusType.notValid;
             }
             //check if the shot is not already done
             foreach(Hit hitTmp in _playerShots)
             {
                 if(hitTmp.Position == coords)
                 {
-                    return "notValid";
+                    return Hit.StatusType.notValid;
                 }
             }
 
             //check if shot is landed or not and if it sunk a full ship
-            var status = "";
+            Hit.StatusType status = Hit.StatusType.Unknown;
             foreach (Ship ship in ennemyBoard.PlayerShips)
             {
                 foreach(ShipPiece piece in ship.ShipPieces)
@@ -293,34 +293,33 @@ namespace BatailleTest.Game.entity
                     {
                         if(ship.Life == 1)
                         {
-                            status = "sunk";
+                            status = Hit.StatusType.sunk;
                         }
                         else
                         {
-                            status = "hit";
+                            status = Hit.StatusType.hit;
                         }
                         ship.Hit(coords);
                     }
                     
                 }
             }
-            if (status == "") { status = "miss"; }
+            if (status == Hit.StatusType.Unknown) { status = Hit.StatusType.miss; }
 
             Hit hit = new Hit(coords, status);
+            hit.CalculHitScore(ennemyBoard);
             _playerShots.Add(hit);
 
             return status;
         }
 
-        public string AutoShot(GameRules rules, Board ennemyBoard)
+        /*public string AutoShot(GameRules rules, Board ennemyBoard)
         {
-            Coordinates coords = new Coordinates();
-            do
-            {
-                coords.Randomize(0, rules.MapSize - 1);
-            }while (isAShotAt(coords));
+            // shoots at a random coordinate and takes
+            var possibleShoot = {x}
             
+            List <Hit> hits = new List<Hit>();
             return AddShot(coords, rules, ennemyBoard);
-        }
+        }*/
     }
 }
