@@ -62,10 +62,11 @@ namespace BatailleTest
             {
                 foreach (ShipPiece shipPiece in ship.ShipPieces)
                 {
-                tb.Text += shipPiece.Position.X.ToString();
-                tb.Text += " ";
-                tb.Text += shipPiece.Position.Y.ToString();
-                tb.Text += " - ";
+                    tb.Text += shipPiece.Position.X.ToString();
+                    tb.Text += " ";
+                    tb.Text += shipPiece.Position.Y.ToString();
+                    tb.Text += " - ";
+                    
                     if (shipPiece.Position.X < GRID_SIZE && shipPiece.Position.Y < GRID_SIZE)
                     {
                         botBoatsCoords[shipPiece.Position.X, shipPiece.Position.Y] = true;
