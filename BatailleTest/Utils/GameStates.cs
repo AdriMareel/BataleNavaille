@@ -10,6 +10,9 @@ namespace BatailleTest.utils
     /// <summary>   Add a type string that can only be egal to (warmup, playing, end) </summary>
     internal class GameStates
     {
+        ///-------------------------------------------------------------------------------------------------
+        /// <summary>   Values that represent states. </summary>
+
         public enum States
         {
             Warmup,
