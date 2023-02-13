@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BatailleTest.DATA;
 
 namespace BatailleTest.Game.entity
 {
@@ -32,7 +33,7 @@ namespace BatailleTest.Game.entity
 
         public void DebugPlayerShipsDisplay()
         {
-            bool[,] board = new bool[10, 10];
+            bool[,] board = new bool[Const.GRID_SIZE, Const.GRID_SIZE];
 
             foreach (Ship ship in _playerShips)
             {
@@ -40,7 +41,7 @@ namespace BatailleTest.Game.entity
                 {
                     try
                     {
-                        if(boatPiece.Position.X <= 10 && boatPiece.Position.Y <= 10)
+                        if(boatPiece.Position.X <= Const.GRID_SIZE && boatPiece.Position.Y <= Const.GRID_SIZE)
                         {
                             board[boatPiece.Position.X, boatPiece.Position.Y] = true;
                         }
@@ -54,10 +55,10 @@ namespace BatailleTest.Game.entity
 
 
             Debug.WriteLine(" ABCDEFGHIJ");
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < Const.GRID_SIZE; i++)
             {
                 Debug.Write(i );
-                for (int j = 0; j < 10; j++)
+                for (int j = 0; j < Const.GRID_SIZE; j++)
                 {
                     Debug.Write((board[i, j]? "*" : "_"));
                 }
