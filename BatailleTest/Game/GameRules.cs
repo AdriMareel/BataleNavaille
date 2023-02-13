@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BatailleTest.DATA;
 
 namespace BatailleTest.Game
 {
@@ -16,8 +17,9 @@ namespace BatailleTest.Game
         private int _mapSize;
 
 
-        public GameRules(int mapSize = 10, int? nbShip = null, Dictionary<String, int> shipList = null)
+        public GameRules(int? mapSize = null, int? nbShip = null, Dictionary<String, int> shipList = null)
         {
+            _mapSize = mapSize??Const.GRID_SIZE;
             _shipList = shipList??DATA.DefaultShip.DefaultShipList;
             _nbShip =  nbShip??DATA.DefaultShip.NumberOfShip;
 
@@ -34,7 +36,6 @@ namespace BatailleTest.Game
                 throw new Exception("Number of ship must be between " + MIN_SHIP + " and " + MAX_SHIP);
             }
 
-            _mapSize = mapSize;
         }
 
         public int NbShip
