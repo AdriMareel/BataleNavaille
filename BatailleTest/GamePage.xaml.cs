@@ -57,7 +57,7 @@ namespace BatailleTest
             TextBlock tb = new TextBlock();
 
             bool[,] botBoatsCoords = new bool[GRID_SIZE,GRID_SIZE];
-
+            
             foreach (var ship in player2.Ships)
             {
                 foreach (ShipPiece shipPiece in ship.ShipPieces)
@@ -66,7 +66,14 @@ namespace BatailleTest
                 tb.Text += " ";
                 tb.Text += shipPiece.Position.Y.ToString();
                 tb.Text += " - ";
-                botBoatsCoords[shipPiece.Position.Y, shipPiece.Position.X] = true;
+                    if (shipPiece.Position.X < GRID_SIZE && shipPiece.Position.Y < GRID_SIZE)
+                    {
+                        botBoatsCoords[shipPiece.Position.X, shipPiece.Position.Y] = true;
+                    }
+                    else
+                    {
+                        Debug.WriteLine("ShipPiece out of bounds" + shipPiece.Position.X + " " + shipPiece.Position.Y);
+                    }
                 }
                 tb.Text += "___";
             }
