@@ -7,6 +7,9 @@ using BatailleTest.DATA;
 
 namespace BatailleTest.Game
 {
+    ///-------------------------------------------------------------------------------------------------
+    /// <summary>   A Class taht contains every rules of a game. </summary>
+
     internal class GameRules
     {
         private int _nbShip;
@@ -16,6 +19,14 @@ namespace BatailleTest.Game
 
         private int _mapSize;
 
+        ///-------------------------------------------------------------------------------------------------
+        /// <summary>   Constructor. </summary>
+        ///
+        /// <exception cref="Exception">    Thrown when values are not possible. </exception>
+        ///
+        /// <param name="mapSize">  (Optional) Size of the map. </param>
+        /// <param name="nbShip">   (Optional) The nb ship. </param>
+        /// <param name="shipList"> (Optional) List of ships. </param>
 
         public GameRules(int? mapSize = null, int? nbShip = null, Dictionary<String, int> shipList = null)
         {
@@ -38,25 +49,53 @@ namespace BatailleTest.Game
 
         }
 
+        ///-------------------------------------------------------------------------------------------------
+        /// <summary>   Gets the nb ship. </summary>
+        ///
+        /// <value> The nb ship. </value>
+
         public int NbShip
         {
             get { return _nbShip; }
         }
+
+        ///-------------------------------------------------------------------------------------------------
+        /// <summary>   Gets the maximum ship number. </summary>
+        ///
+        /// <value> The maximum ship. </value>
 
         public int MaxShip
         {
             get { return MAX_SHIP; }
         }
 
+        ///-------------------------------------------------------------------------------------------------
+        /// <summary>   Gets a list of ships that should be in the game. </summary>
+        ///
+        /// <value> A list of ships. </value>
+
         public Dictionary<String, int> ShipList
         {
             get { return _shipList; }
         }
 
+        ///-------------------------------------------------------------------------------------------------
+        /// <summary>   Gets the map size. </summary>
+        ///
+        /// <value> The size of the map. </value>
+
         public int MapSize
         {
             get { return _mapSize; }
         }
+
+        ///-------------------------------------------------------------------------------------------------
+        /// <summary>   Adds a ship to the rules. </summary>
+        ///
+        /// <exception cref="Exception">    Thrown when an exception error condition occurs. </exception>
+        ///
+        /// <param name="shipName"> Name of the ship. </param>
+        /// <param name="size">     The size. </param>
 
         public void addShip(string shipName, int size)
         {
@@ -88,6 +127,11 @@ namespace BatailleTest.Game
             _nbShip++;
             _shipList.Add(shipName, size);
         }
+
+        ///-------------------------------------------------------------------------------------------------
+        /// <summary>   Determine if the rules are valid. </summary>
+        ///
+        /// <returns>   True if rules valid, false if not. </returns>
 
         public bool areRulesValid()
         {

@@ -130,6 +130,8 @@ namespace BatailleTest
                     if (botBoatsCoords[a,b])
                     {
                         border2.Background = new SolidColorBrush(Windows.UI.Colors.Red);
+                        
+                        //border2.Clip = new RectangleGeometry() { Rect = new Rect(0, 0, 50, 50) };
                         border2.CornerRadius = new CornerRadius(10);
                     }
 

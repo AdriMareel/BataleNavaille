@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace BatailleTest.utils
 {
-    //Add a type string that can only be egal to (warmup, playing, end)
-
+    ///-------------------------------------------------------------------------------------------------
+    /// <summary>   Add a type string that can only be egal to (warmup, playing, end) </summary>
     internal class GameStates
     {
         public enum States
@@ -20,10 +20,20 @@ namespace BatailleTest.utils
 
         private States _state;
 
+        ///-------------------------------------------------------------------------------------------------
+        /// <summary>   Constructor. </summary>
+        ///
+        /// <param name="state">    (Optional) The state. </param>
+
         public GameStates(States state = States.Warmup)
         {
             _state = state;
         }
+
+        ///-------------------------------------------------------------------------------------------------
+        /// <summary>   Gets or sets the state. </summary>
+        ///
+        /// <value> The state. </value>
 
         public States State
         {
