@@ -1,4 +1,5 @@
-﻿using BatailleTest.Game;
+﻿using BatailleTest.DATA;
+using BatailleTest.Game;
 using BatailleTest.Game.entity;
 using System;
 using System.Collections.Generic;
