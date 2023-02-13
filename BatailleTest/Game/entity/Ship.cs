@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace BatailleTest.Game.entity
 {
+    /// <summary>
+    /// Classe représentant un bateau 
+    /// </summary>
     internal class Ship
     {
         private int _size;
@@ -17,6 +20,13 @@ namespace BatailleTest.Game.entity
         private int _life;
         private bool _isAlive;
 
+        /// <summary>
+        /// Constructeur de la classe <c>Ship</c>
+        /// </summary>
+        /// <param name="startPosition">Position de la première pièce du bateau</param>
+        /// <param name="name">Nom du bateau</param>
+        /// <param name="size">Taille du bateau</param>
+        /// <param name="isVertical">Est=ce que le bateau est orienté verticalement ou non</param>
         public Ship(utils.Coordinates startPosition,string name , int size, bool isVertical = true)
         {
             _startPosition = startPosition;
@@ -29,7 +39,9 @@ namespace BatailleTest.Game.entity
             generateBoatPieces();
         }
 
-
+        /// <summary>
+        /// Génère les pièces individuelles qui composent le bateau
+        /// </summary>
         private void generateBoatPieces()
         {
             _shipPieces = new List<ShipPiece>();
@@ -90,6 +102,10 @@ namespace BatailleTest.Game.entity
             get { return _shipPieces; }
         }
 
+        /// <summary>
+        /// Déclare que le bateau a été touchée
+        /// </summary>
+        /// <param name="position">Coordonnées touchée</param>
         public void Hit(utils.Coordinates position)
         {
             foreach (ShipPiece boatPiece in _shipPieces)
@@ -105,6 +121,12 @@ namespace BatailleTest.Game.entity
                 }
             }
         }
+        /// <summary>
+        /// Test si un bateau est égal à un autre
+        /// </summary>
+        /// <param name="ship1">Premier bateau</param>
+        /// <param name="ship2">Deuxième bateau</param>
+        /// <returns>Vrai si les deux bateaux sont les mêmes, faux sinon</returns>
         public static bool operator ==(Ship ship1, Ship ship2)
         {
             if (ship1.Size == ship2.Size && ship1.Name == ship2.Name)

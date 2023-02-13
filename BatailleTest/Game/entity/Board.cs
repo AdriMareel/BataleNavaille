@@ -8,12 +8,15 @@ using BatailleTest.DATA;
 
 namespace BatailleTest.Game.entity
 {
+    /// <summary>
+    /// La classe <c>Board</c> contient les bateaux et tirs d'un joueur.
+    /// </summary>
     internal class Board
     {
         private List<Ship> _playerShips;
         private List<Hit> _playerShots;
 
-
+        /// <param name="player">L'objet <c>Player</c> du joueur concerné</param>
         public Board(Player player)
         {
             _playerShots = player.PlayerShots;
