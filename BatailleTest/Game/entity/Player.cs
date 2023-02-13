@@ -175,7 +175,7 @@ namespace BatailleTest.Game.entity
                 bool randDir = false;
                 do
                 {
-                    randCoords.Randomize(0, rules.MapSize);
+                    randCoords.Randomize(0, rules.MapSize-1);
                     ship.StartPosition = randCoords;
                     
                     randDir = r.NextDouble() >= 0.5;
