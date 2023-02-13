@@ -257,5 +257,15 @@ namespace BatailleTest.Game.entity
             return status;
         }
 
+        public string AutoShot(GameRules rules, Board ennemyBoard)
+        {
+            Coordinates coords = new Coordinates();
+            do
+            {
+                coords.Randomize(0, rules.MapSize - 1)
+            }
+            while (isAShotAt(coords));
+            return AddShot(coords, rules, ennemyBoard);
+        }
     }
 }
