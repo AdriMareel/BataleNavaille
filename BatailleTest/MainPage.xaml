@@ -9,11 +9,11 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <TextBox x:Name="namePlayer1" HorizontalAlignment="Left" Margin="613,540,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" TextChanged="TextBox_TextChanged" RenderTransformOrigin="0.771,2.812" Width="150"/>
-        <TextBox x:Name="namePlayer2" HorizontalAlignment="Left" Margin="1219,540,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" TextChanged="TextBox_TextChanged" RenderTransformOrigin="0.771,2.812" Width="150"/>
-        <TextBlock FontSize="50px" HorizontalAlignment="Left" Margin="802,294,0,0" TextWrapping="Wrap" Text="Bataille Navale" VerticalAlignment="Top" Height="82" Width="332" SelectionChanged="TextBlock_SelectionChanged"/>
-        <TextBlock HorizontalAlignment="Left" Margin="613,498,0,0" TextWrapping="Wrap" Text="Player1" VerticalAlignment="Top" RenderTransformOrigin="0.677,0.609"/>
-        <TextBlock HorizontalAlignment="Left" Margin="1219,498,0,0" TextWrapping="Wrap" Text="Player2" VerticalAlignment="Top"/>
-        <Button Content="Play" Margin="0,804,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.242,-0.469" Click="Button_Click" HorizontalAlignment="Center" Width="67"/>
+        <TextBox x:Name="namePlayer1" HorizontalAlignment="Left" Margin="347,376,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" TextChanged="TextBox_TextChanged" RenderTransformOrigin="0.771,2.812" Width="150"/>
+        <TextBox x:Name="namePlayer2" HorizontalAlignment="Left" Margin="798,376,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" TextChanged="TextBox_TextChanged" RenderTransformOrigin="0.771,2.812" Width="150"/>
+        <TextBlock FontSize="50px" HorizontalAlignment="Left" Margin="478,115,0,0" TextWrapping="Wrap" Text="Bataille Navale" VerticalAlignment="Top" Height="82" Width="332" SelectionChanged="TextBlock_SelectionChanged"/>
+        <TextBlock HorizontalAlignment="Left" Margin="347,333,0,0" TextWrapping="Wrap" Text="Player1" VerticalAlignment="Top" RenderTransformOrigin="0.677,0.609"/>
+        <TextBlock HorizontalAlignment="Left" Margin="798,341,0,0" TextWrapping="Wrap" Text="Player2" VerticalAlignment="Top"/>
+        <Button Content="Play" Margin="0,532,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.242,-0.469" Click="Button_Click" HorizontalAlignment="Center" Width="67"/>
     </Grid>
 </Page>

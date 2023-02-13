@@ -117,6 +117,7 @@ namespace BatailleTest
                     border2.SetValue(Grid.ColumnProperty, b);
                     border2.SetValue(Grid.RowProperty, a);
 
+                    //affichage des coords des bateaux de l'IA
                     if (botBoatsCoords[a,b])
                     {
                         border2.Background = new SolidColorBrush(Windows.UI.Colors.Red);
