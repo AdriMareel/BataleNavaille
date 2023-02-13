@@ -6,11 +6,18 @@ using System.Threading.Tasks;
 
 namespace BatailleTest.Game.entity
 {
+    /// <summary>
+    /// Classe définissant une pièce appartenant à un bateau <c>Ship</c>
+    /// </summary>
     internal class ShipPiece
     {
         private utils.Coordinates _position;
         private bool _isHit;
-
+        
+        /// <summary>
+        /// Constructeur de classe
+        /// </summary>
+        /// <param name="position">Position de la pièce</param>
         public ShipPiece(utils.Coordinates position)
         {
             _position = position;

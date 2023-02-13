@@ -9,6 +9,9 @@ using Windows.Media.Playback;
 
 namespace BatailleTest.Game.entity
 {
+    /// <summary>
+    /// Classe représentant un joueur
+    /// </summary>
     internal class Player
     {
         private string _name;
@@ -17,6 +20,10 @@ namespace BatailleTest.Game.entity
 
         private List<Hit> _playerShots;
 
+        /// <summary>
+        /// Constructeur de la classe
+        /// </summary>
+        /// <param name="name">Nom du joueur</param>
         public Player(string name)
         {
             _name = name;
@@ -41,6 +48,7 @@ namespace BatailleTest.Game.entity
             get { return _ships; }
         }
 
+        /// <returns>Le nombre de bateau d'un joueur</returns>
         public int getNumberOfShip()
         {
             return _ships.Count;
@@ -51,6 +59,11 @@ namespace BatailleTest.Game.entity
             get { return _playerShots; }
         }
 
+        /// <summary>
+        /// Verifie si une position contient une partie d'un bateau
+        /// </summary>
+        /// <param name="position">Coordonnée à verifier</param>
+        /// <returns>Un booléen vrai si un bateau est à la position choisie, faux sinon</returns>
         public bool isAShipAt(utils.Coordinates position)
         {
             foreach (Ship ship in _ships)
@@ -67,6 +80,11 @@ namespace BatailleTest.Game.entity
             return false;
         }
 
+        /// <summary>
+        /// Renseigne quel bateau est à une position
+        /// </summary>
+        /// <param name="position">Coordonnée à vérifier</param>
+        /// <returns>L'index du bateau ou -1 si il n'y a pas de bateau</returns>
         public int getIndexOfShipAt(utils.Coordinates position)
         {
             for (int i = 0; i < _ships.Count; i++)
@@ -82,6 +100,12 @@ namespace BatailleTest.Game.entity
             return -1;
         }
 
+        /// <summary>
+        /// Est-ce qu'un bateau rentre aux coordonnées qu'on lui a défini
+        /// </summary>
+        /// <param name="ship">Le bateau <c>Ship</c> a tester</param>
+        /// <param name="rules">La règle du jeu actuelle</param>
+        /// <returns>Vrai si le bateau peut être placé, faux sinon</returns>
         public bool doesShipFit(Ship ship, GameRules rules)
         {
             foreach (ShipPiece shipPiece in ship.ShipPieces)
@@ -95,6 +119,10 @@ namespace BatailleTest.Game.entity
             return true;
         }
 
+        /// <summary>
+        /// Est=ce qu'il reste un bateau en vie sur le plateau du joueur actuel
+        /// </summary>
+        /// <returns>Vrai si il reste au moins un bateau, faux sinon</returns>
         public bool isAShipAlive()
         {
             foreach (Ship ship in _ships)
@@ -107,6 +135,12 @@ namespace BatailleTest.Game.entity
             return false;
         }
 
+        /// <summary>
+        /// Permet d'ajouter un bateau à la liste des bateaux du joueur 
+        /// </summary>
+        /// <param name="ship">Bateau à ajouter</param>
+        /// <param name="rules">Règle de la partie actuelle</param>
+        /// <returns>Vrai si le bateau à été placé et ajouté à la liste, faux sinon</returns>
         public bool AddShip(Ship ship, GameRules rules)
         {
 
@@ -135,6 +169,11 @@ namespace BatailleTest.Game.entity
             return true;
         }
 
+        /// <summary>
+        /// Permet de savoir si il reste des bateaux à placer sur le plateau
+        /// </summary>
+        /// <param name="rules">Règles de la partie actuelle</param>
+        /// <returns>Une liste de bateaux pas encore placés</returns>
         public List<Ship> GetMissingBoat(GameRules rules)
         {
             List<Ship> missingBoat = new List<Ship>();
@@ -161,6 +200,11 @@ namespace BatailleTest.Game.entity
             return missingBoat;
         }
 
+        /// <summary>
+        /// Place aléatoirement tous les bateaux du joueur (prend en compte le fait qu'il en ai déjà placé certains)
+        /// </summary>
+        /// <param name="rules">Règles de la partie actuelle</param>
+        /// <returns>"ok" si tout s'est bien déroulé, "error" sinon</returns>
         public string RandomShips(GameRules rules)
         {
             List<Ship> missing = GetMissingBoat(rules);
@@ -192,7 +236,11 @@ namespace BatailleTest.Game.entity
             return "ok";
         }
 
-
+        /// <summary>
+        /// Permet de savoir si un tir a déjà été effectué à une certaine position
+        /// </summary>
+        /// <param name="position">Coordonnées de la position à vérifier</param>
+        /// <returns>Vrai si un tir a déjà été effectué à la position choisie, faux sinon</returns>
         public bool isAShotAt(utils.Coordinates position)
         {
             foreach (Hit hit in _playerShots)
@@ -205,7 +253,13 @@ namespace BatailleTest.Game.entity
             return false;
         }
 
-
+        /// <summary>
+        /// Ajoute un tir sur le plateau de l'ennemi
+        /// </summary>
+        /// <param name="coords">Coordonnéesdu tir à effectuer</param>
+        /// <param name="rules">Règles de la partie actuelle</param>
+        /// <param name="ennemyBoard">Plateau de  jeu ennemi</param>
+        /// <returns>"notValid" si le tir est impossible, "miss" si tir raté, "hit" ou "sunk" si bateau ennemi touché</returns>
         public string AddShot(Coordinates coords, GameRules rules, Board ennemyBoard)
         {
 

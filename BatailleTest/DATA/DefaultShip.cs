@@ -10,6 +10,9 @@ using Windows.Media.Devices.Core;
 
 namespace BatailleTest.DATA
 {
+    /// <summary>
+    /// La classe <c>DefaultShip</c> contient les informations (taille et nom) de tous les bateaux possibles.
+    /// </summary>
     static class DefaultShip
     {
         private const int CARRIER_SIZE = 5;
