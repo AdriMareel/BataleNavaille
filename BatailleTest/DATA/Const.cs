@@ -13,5 +13,7 @@ namespace BatailleTest.DATA
     static class Const
     {
         public static int GRID_SIZE = 10;
+
+        public static int MAX_TRY = 10000;
     }
 }

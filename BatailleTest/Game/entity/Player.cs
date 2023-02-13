@@ -1,4 +1,5 @@
-﻿using BatailleTest.utils;
+﻿using BatailleTest.DATA;
+using BatailleTest.utils;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -210,7 +211,7 @@ namespace BatailleTest.Game.entity
             List<Ship> missing = GetMissingBoat(rules);
             Random r = new Random();
 
-            const int SAFETY_LIMIT = 1000;
+            int SAFETY_LIMIT = Const.MAX_TRY;
             int iterator = 0;
             
             foreach (Ship ship in missing)
