@@ -316,9 +316,9 @@ namespace BatailleTest.Game.entity
             Coordinates coords = new Coordinates();
             do
             {
-                coords.Randomize(0, rules.MapSize - 1)
-            }
-            while (isAShotAt(coords));
+                coords.Randomize(0, rules.MapSize - 1);
+            }while (isAShotAt(coords));
+            
             return AddShot(coords, rules, ennemyBoard);
         }
     }
