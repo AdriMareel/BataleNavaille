@@ -307,7 +307,7 @@ namespace BatailleTest.Game.entity
             if (status == Hit.StatusType.Unknown) { status = Hit.StatusType.miss; }
 
             Hit hit = new Hit(coords, status);
-            hit.CalculHitScore(ennemyBoard);
+            hit.CalculHitScore(_playerShots);
             _playerShots.Add(hit);
 
             return status;

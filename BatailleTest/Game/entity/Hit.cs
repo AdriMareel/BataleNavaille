@@ -71,10 +71,40 @@ namespace BatailleTest.Game.entity
             set { _score = value; }
         }
            
-        public void CalculHitScore(Board ennemyBoard)
+        public void CalculHitScore(List<Hit> hitList, string checkAxis = "")
         {
 
-        }
+            int score = 0;
+            int XScore = 0;
+            int YScore = 0;
 
+            //if there is an adjacent hit with his status = hit score +1
+
+            if (hitList.Exists(hit => hit.Position.X == _position.X - 1 && hit.Position.Y == _position.Y && hit.Status == StatusType.hit))
+            {
+                XScore++;
+            }
+            if (hitList.Exists(hit => hit.Position.X == _position.X + 1 && hit.Position.Y == _position.Y && hit.Status == StatusType.hit))
+            {
+                XScore++;
+            }
+            if (hitList.Exists(hit => hit.Position.X == _position.X && hit.Position.Y == _position.Y - 1 && hit.Status == StatusType.hit))
+            {
+                YScore++;
+            }
+            if (hitList.Exists(hit => hit.Position.X == _position.X && hit.Position.Y == _position.Y + 1 && hit.Status == StatusType.hit))
+            {
+                YScore++;
+            }
+
+            if(XScore == 0 && YScore == 0)
+            {
+                _score = 0;
+            }
+
+            //if the current hit is between is a hit with status = hit add big to  to score
+            //if current hit is inside a continuous line of hits with status = hit add 5 to score for each hit in the line
+            //
+        }
     }
 }
