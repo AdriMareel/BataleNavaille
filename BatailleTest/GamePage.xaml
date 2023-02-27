@@ -9,20 +9,31 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <Grid x:Name="gamePlayer1">
-            
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition x:Name="WidthGrid1" Width="400px"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition x:Name="WidthGrid2" Width="400px"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition x:Name="HeightGrid" Height="400px"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock x:Name="player1Name" Margin="0,0,0,20" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom">Player1</TextBlock>
+        <TextBlock x:Name="player2Name" Margin="0,0,0,20" Grid.Column="3" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom">Player2</TextBlock>
+
+        <Grid x:Name="gamePlayer1" Grid.Column="1" Grid.Row="1">
+
         </Grid>
 
-        <Grid x:Name="gamePlayer2">
+        <Grid x:Name="gamePlayer2" Grid.Column="3" Grid.Row="1">
             
-
         </Grid>
-        <TextBlock x:Name="player1Name" HorizontalAlignment="Left" Margin="392,504,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" SelectionChanged="TextBlock_SelectionChanged" Height="19"/>
-        <TextBlock x:Name="player2Name" HorizontalAlignment="Left" Margin="1160,504,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" SelectionChanged="TextBlock_SelectionChanged" Height="19"/>
-        
-        <Border x:Name="console" HorizontalAlignment="Left" Height="153" Margin="421,540,0,0" VerticalAlignment="Top" Width="666"/>
-        
     </Grid>
-    
-    
+
+
 </Page>

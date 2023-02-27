@@ -78,33 +78,30 @@ namespace BatailleTest
                 }
                 tb.Text += "___";
             }
-            console.Child = tb;
 
             
             Grid gridPlayer1 = gamePlayer1;
             Grid gridPlayer2 = gamePlayer2;
 
-            gridPlayer2.Margin = new Thickness(1000,0,0,0);
-
             //créations des grilles pour l'interface en fonction de la GRID_SIZE choisie pour le joueur 
             for (int i = 0; i < GRID_SIZE; i++){
                 ColumnDefinition c = new ColumnDefinition();
-                c.Width = new GridLength(50, GridUnitType.Pixel);
+                c.Width = new GridLength(1, GridUnitType.Star);
                 gridPlayer1.ColumnDefinitions.Add(c);
 
                 RowDefinition r = new RowDefinition();
-                r.Height = new GridLength(50, GridUnitType.Pixel);
+                r.Height = new GridLength(1, GridUnitType.Star);
                 gridPlayer1.RowDefinitions.Add(r);
             }
 
             for (int i = 0; i < GRID_SIZE; i++)
             {
                 ColumnDefinition c = new ColumnDefinition();
-                c.Width = new GridLength(50, GridUnitType.Pixel);
+                c.Width = new GridLength(1, GridUnitType.Star);
                 gridPlayer2.ColumnDefinitions.Add(c);
 
                 RowDefinition r = new RowDefinition();
-                r.Height = new GridLength(50, GridUnitType.Pixel);
+                r.Height = new GridLength(1, GridUnitType.Star);
                 gridPlayer2.RowDefinitions.Add(r);
             }
             
@@ -130,19 +127,14 @@ namespace BatailleTest
                     if (botBoatsCoords[a,b])
                     {
                         border2.Background = new SolidColorBrush(Windows.UI.Colors.Red);
-                        
-                        //border2.Clip = new RectangleGeometry() { Rect = new Rect(0, 0, 50, 50) };
-                        border2.CornerRadius = new CornerRadius(10);
                     }
-
                     gridPlayer2.Children.Add(border2);
 
                     border.PointerEntered += Grid_PointerEntered;
                     border.PointerExited += Grid_PointerExited;
                 }
             }
-
-            
+            Debug.WriteLine(gridPlayer2.Children);
         }
 
         private void Grid_PointerEntered(object sender, PointerRoutedEventArgs e)
