@@ -43,48 +43,43 @@ namespace BatailleTest
         public GamePage()
         {
             this.InitializeComponent();
-            const int GRID_SIZE = 10;
+            
+            //init variables
             Game.Game game = new Game.Game(player1Name : this.player1Name.Text, player2Name : this.player2Name.Text);
             Game.GameRules gameRules = game.GameRules;
             Game.entity.Player player1 = game.Player1;
             Game.entity.Player player2 = game.Player2;
             Board boardPlayer1 = game.PlayerOneBoard;
             Board boardPlayer2 = game.PlayerTwoBoard;
-
-
             player2.RandomShips(gameRules);
+            var botBoatsCoords = getAIBoatsCoords(player2);
+            Grid gridPlayer1 = gamePlayer1;
+            Grid gridPlayer2 = gamePlayer2;
 
-            TextBlock tb = new TextBlock();
+            initGridsView(gridPlayer1, gridPlayer2, botBoatsCoords);
+        }
 
-            bool[,] botBoatsCoords = new bool[GRID_SIZE,GRID_SIZE];
-            
+        private bool[,] getAIBoatsCoords(Player player2)
+        {
+            const int GRID_SIZE = 10;
+            bool[,] botBoatsCoords = new bool[GRID_SIZE, GRID_SIZE];
+
             foreach (var ship in player2.Ships)
             {
                 foreach (ShipPiece shipPiece in ship.ShipPieces)
                 {
-                    tb.Text += shipPiece.Position.X.ToString();
-                    tb.Text += " ";
-                    tb.Text += shipPiece.Position.Y.ToString();
-                    tb.Text += " - ";
-                    
-                    if (shipPiece.Position.X < GRID_SIZE && shipPiece.Position.Y < GRID_SIZE)
-                    {
-                        botBoatsCoords[shipPiece.Position.X, shipPiece.Position.Y] = true;
-                    }
-                    else
-                    {
-                        Debug.WriteLine("ShipPiece out of bounds" + shipPiece.Position.X + " " + shipPiece.Position.Y);
-                    }
+                    botBoatsCoords[shipPiece.Position.X, shipPiece.Position.Y] = true;
                 }
-                tb.Text += "___";
             }
+            return botBoatsCoords;
+        }
 
-            
-            Grid gridPlayer1 = gamePlayer1;
-            Grid gridPlayer2 = gamePlayer2;
-
+        private void initGridsView(Grid gridPlayer1, Grid gridPlayer2, bool[,] botBoatsCoords)
+        {
+            const int GRID_SIZE = 10;
             //créations des grilles pour l'interface en fonction de la GRID_SIZE choisie pour le joueur 
-            for (int i = 0; i < GRID_SIZE; i++){
+            for (int i = 0; i < GRID_SIZE; i++)
+            {
                 ColumnDefinition c = new ColumnDefinition();
                 c.Width = new GridLength(1, GridUnitType.Star);
                 gridPlayer1.ColumnDefinitions.Add(c);
@@ -104,7 +99,7 @@ namespace BatailleTest
                 r.Height = new GridLength(1, GridUnitType.Star);
                 gridPlayer2.RowDefinitions.Add(r);
             }
-            
+
             for (int a = 0; a < GRID_SIZE; a++)
             {
                 for (int b = 0; b < GRID_SIZE; b++)
@@ -124,17 +119,18 @@ namespace BatailleTest
                     border2.SetValue(Grid.RowProperty, a);
 
                     //affichage des coords des bateaux de l'IA
-                    if (botBoatsCoords[a,b])
+                    if (botBoatsCoords[a, b])
                     {
                         border2.Background = new SolidColorBrush(Windows.UI.Colors.Red);
                     }
                     gridPlayer2.Children.Add(border2);
 
+                    //set event listeners
                     border.PointerEntered += Grid_PointerEntered;
                     border.PointerExited += Grid_PointerExited;
                 }
             }
-            Debug.WriteLine(gridPlayer2.Children);
+
         }
 
         private void Grid_PointerEntered(object sender, PointerRoutedEventArgs e)
