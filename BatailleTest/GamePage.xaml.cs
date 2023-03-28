@@ -27,6 +27,15 @@ namespace BatailleTest
     /// </summary>
     public sealed partial class GamePage : Page
     {
+        private Game.Game game;
+        private Game.GameRules gameRules;
+        private Game.entity.Player player1;
+        private Game.entity.Player player2;
+        private Board boardPlayer1;
+        private Board boardPlayer2;
+        private Grid gridPlayer1;
+        private Grid gridPlayer2;
+
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
@@ -43,20 +52,27 @@ namespace BatailleTest
         public GamePage()
         {
             this.InitializeComponent();
-            
+
             //init variables
-            Game.Game game = new Game.Game(player1Name : this.player1Name.Text, player2Name : this.player2Name.Text);
-            Game.GameRules gameRules = game.GameRules;
-            Game.entity.Player player1 = game.Player1;
-            Game.entity.Player player2 = game.Player2;
-            Board boardPlayer1 = game.PlayerOneBoard;
-            Board boardPlayer2 = game.PlayerTwoBoard;
-            player2.RandomShips(gameRules);
+            this.game = new Game.Game(player1Name : this.player1Name.Text, player2Name : this.player2Name.Text);
+            this.gameRules = game.GameRules;
+            this.player1 = game.Player1;
+            this.player2 = game.Player2;
+            this.boardPlayer1 = game.PlayerOneBoard;
+            this.boardPlayer2 = game.PlayerTwoBoard;
+            this.player2.RandomShips(gameRules);
             var botBoatsCoords = getAIBoatsCoords(player2);
-            Grid gridPlayer1 = gamePlayer1;
-            Grid gridPlayer2 = gamePlayer2;
+            this.gridPlayer1 = gamePlayer1;
+            this.gridPlayer2 = gamePlayer2;
 
             initGridsView(gridPlayer1, gridPlayer2, botBoatsCoords);
+
+            List<Ship> missingBoatsPlayer = player1.GetMissingBoat(gameRules);
+
+            missingBoatsPlayer.ForEach(boat => 
+                Debug.WriteLine(boat.Name)
+            );
+
         }
 
         private bool[,] getAIBoatsCoords(Player player2)
@@ -127,28 +143,80 @@ namespace BatailleTest
 
                     //set event listeners
                     border.PointerEntered += Grid_PointerEntered;
-                    border.PointerExited += Grid_PointerExited;
+                    border.Tapped += Grid_Tapped;
+
+
                 }
             }
-
         }
 
+        private void Grid_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            Border border = (Border)sender;
+            border.Background = new SolidColorBrush(Windows.UI.Colors.Blue);
+
+            // Obtenir les coordonnées de la case survolée
+            int x = Grid.GetColumn(border);
+            int y = Grid.GetRow(border);
+
+            // Obtenir la liste des bateaux manquants pour le joueur 1
+            List<Ship> missingBoatsPlayer = this.player1.GetMissingBoat(gameRules);
+            var boat = missingBoatsPlayer[0];
+
+            foreach (ShipPiece piece in boat.ShipPieces)
+            {
+                Border previewBorder = new Border();
+                previewBorder.Background = new SolidColorBrush(Windows.UI.Colors.Blue);
+                previewBorder.SetValue(Grid.ColumnProperty, piece.Position.X);
+                previewBorder.SetValue(Grid.RowProperty, piece.Position.Y);
+                gridPlayer1.Children.Add(previewBorder);
+            }
+            this.player1.AddShip(boat, this.gameRules);
+
+            Debug.WriteLine("bateau ajouté");
+        }
+        
         private void Grid_PointerEntered(object sender, PointerRoutedEventArgs e)
         {
+            removePreview();
+            Debug.WriteLine("removePreview Launched");
             Border border = sender as Border;
-            border.Background = new SolidColorBrush(Windows.UI.Colors.Green);
-            
+            border.Background = new SolidColorBrush(Windows.UI.Colors.Blue);
+
+            // Obtenir les coordonnées de la case survolée
+            int x = Grid.GetColumn(border);
+            int y = Grid.GetRow(border);
+
+            // Obtenir la liste des bateaux manquants pour le joueur 1
+            List<Ship> missingBoatsPlayer = this.player1.GetMissingBoat(gameRules);
+            var boat = missingBoatsPlayer[0];
+
+            foreach (ShipPiece piece in boat.ShipPieces)
+            {
+                Border previewBorder = new Border();
+                previewBorder.Background = new SolidColorBrush(Windows.UI.Colors.LightBlue);
+                previewBorder.SetValue(Grid.ColumnProperty, x + piece.Position.X);
+                previewBorder.SetValue(Grid.RowProperty, y + piece.Position.Y);
+                gridPlayer1.Children.Add(previewBorder);
+            }
+        }
+
+        private void removePreview()
+        {
+            foreach (Border border in this.gridPlayer1.Children)
+            {
+                Debug.WriteLine(border.Background);
+                if (border.Background == new SolidColorBrush(Windows.UI.Colors.LightBlue))
+                {
+                    border.Background = new SolidColorBrush(Windows.UI.Colors.Transparent);
+                }
+            }
         }
 
         private void Grid_PointerExited(object sender, PointerRoutedEventArgs e)
         {
             Border border = sender as Border;
             border.Background = new SolidColorBrush(Windows.UI.Colors.Transparent);
-
-        }
-
-        private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)
-        {
 
         }
     }
