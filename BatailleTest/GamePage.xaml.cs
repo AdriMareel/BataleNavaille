@@ -1,6 +1,7 @@
 ﻿using BatailleTest.DATA;
 using BatailleTest.Game;
 using BatailleTest.Game.entity;
+using BatailleTest.utils;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -37,6 +38,8 @@ namespace BatailleTest
         private Grid gridPlayer1;
         private Grid gridPlayer2;
         private Rectangle[,] gridElements = new Rectangle[10,10];
+        private bool[,] botBoatsCoords = new bool[10, 10];
+        private bool[,] playerBoatsCoords = new bool[10, 10];
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -63,11 +66,11 @@ namespace BatailleTest
             this.boardPlayer1 = game.PlayerOneBoard;
             this.boardPlayer2 = game.PlayerTwoBoard;
             this.player2.RandomShips(gameRules);
-            var botBoatsCoords = getAIBoatsCoords(player2);
+            this.botBoatsCoords = getAIBoatsCoords(player2);
             this.gridPlayer1 = gamePlayer1;
             this.gridPlayer2 = gamePlayer2;
 
-            initGridsView(this.gridPlayer1, this.gridPlayer2, botBoatsCoords);
+            initGridsView(this.gridPlayer1, this.gridPlayer2, this.botBoatsCoords);
 
             List<Ship> missingBoatsPlayer = player1.GetMissingBoat(gameRules);
 
@@ -159,12 +162,12 @@ namespace BatailleTest
 
         private void Grid_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            Border border = (Border)sender;
-            border.Background = new SolidColorBrush(Windows.UI.Colors.Blue);
+            Rectangle rectangle = sender as Rectangle;
+            rectangle.Fill = new SolidColorBrush(Windows.UI.Colors.Blue);
 
             // Obtenir les coordonnées de la case survolée
-            int x = Grid.GetColumn(border);
-            int y = Grid.GetRow(border);
+            int x = Grid.GetColumn(rectangle);
+            int y = Grid.GetRow(rectangle);
 
             // Obtenir la liste des bateaux manquants pour le joueur 1
             List<Ship> missingBoatsPlayer = this.player1.GetMissingBoat(gameRules);
@@ -172,10 +175,13 @@ namespace BatailleTest
 
             foreach (ShipPiece piece in boat.ShipPieces)
             {
-                Rectangle rectangle = this.gridElements[piece.Position.Y, piece.Position.X];
-                rectangle.Fill = new SolidColorBrush(Windows.UI.Colors.Blue);
+                Rectangle rectangleFollowing = this.gridElements[y + piece.Position.Y, x + piece.Position.X];
+                rectangleFollowing.Fill = new SolidColorBrush(Windows.UI.Colors.Blue);
+                this.playerBoatsCoords[y + piece.Position.Y, x + piece.Position.X] = true;
             }
-            this.player1.AddShip(boat, this.gameRules);
+            Coordinates coord = new Coordinates(x, y);
+            this.game.PlayTurn(coord, this.player1);
+            
 
             Debug.WriteLine("bateau ajouté");
         }
@@ -183,7 +189,7 @@ namespace BatailleTest
         private void Grid_PointerEntered(object sender, PointerRoutedEventArgs e)
         {
             removePreview();
-            Debug.WriteLine("removePreview Launched");
+            
             Rectangle rectangle = sender as Rectangle;
             rectangle.Fill = new SolidColorBrush(Windows.UI.Colors.LightBlue);
 
@@ -197,24 +203,32 @@ namespace BatailleTest
 
             foreach (ShipPiece piece in boat.ShipPieces)
             {
-                Rectangle rectangleFollowing = this.gridElements[piece.Position.Y, piece.Position.X];
-                rectangleFollowing.Fill = new SolidColorBrush(Windows.UI.Colors.Blue);
+                Rectangle rectangleFollowing = this.gridElements[y + piece.Position.Y, x + piece.Position.X];
+                rectangleFollowing.Fill = new SolidColorBrush(Windows.UI.Colors.LightBlue);
             }
         }
 
         private void removePreview()
         {
             foreach (Rectangle rectangle in this.gridPlayer1.Children)
-            { 
+            {
                 rectangle.Fill = new SolidColorBrush(Windows.UI.Colors.Transparent);
+                int x = Grid.GetColumn(rectangle);
+                int y = Grid.GetRow(rectangle);
+                if (this.playerBoatsCoords[y, x])
+                {
+                    rectangle.Fill = new SolidColorBrush(Windows.UI.Colors.Blue);
+                    
+                }
             }
-        }
-
-        private void Grid_PointerExited(object sender, PointerRoutedEventArgs e)
-        {
-            Border border = sender as Border;
-            border.Background = new SolidColorBrush(Windows.UI.Colors.Transparent);
-
+            
+            for (int i = 0; i < 10; i++)
+            {
+                for (int j = 0; j < 10; j++)
+                {
+                    Debug.WriteLine(this.playerBoatsCoords[j, i]);
+                }
+            }
         }
     }
 }
