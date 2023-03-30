@@ -181,11 +181,11 @@ namespace BatailleTest
             Coordinates coord = new Coordinates(x, y);
             this.game.PlayTurn(coord, this.player1, this.vertical);
 
-            this.refreshView();
+            this.refreshBoatView();
 
         }
         
-        private void refreshView()
+        private void refreshBoatView()
         {
             foreach (Ship ship in this.boardPlayer1.PlayerShips)
             {
