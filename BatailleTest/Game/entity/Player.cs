@@ -201,6 +201,11 @@ namespace BatailleTest.Game.entity
             return missingBoat;
         }
 
+        public void ClearAllShips()
+        {
+            this.Ships.Clear();
+        }
+
         /// <summary>
         /// Place aléatoirement tous les bateaux du joueur (prend en compte le fait qu'il en ai déjà placé certains)
         /// </summary>

@@ -31,6 +31,9 @@
         </Grid>
         
         <StackPanel Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
+            <Button x:Name="cleaBtn" HorizontalAlignment="Center" Margin="10" Click="clearBtn_Click">
+                Clear all
+            </Button>
             <Button x:Name="randomBtn" HorizontalAlignment="Center" Margin="10" Click="randomBtn_Click">
                 Random ships
             </Button>
