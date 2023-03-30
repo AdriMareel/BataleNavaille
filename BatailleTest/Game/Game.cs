@@ -293,6 +293,7 @@ namespace BatailleTest.Game
                 {
                     return false;
                 }
+                    return true;
             }
             else if(_currentPlayer == _player2)
             {
@@ -300,9 +301,10 @@ namespace BatailleTest.Game
                 {
                     return false;
                 }
+                return true;
             }
             else { return false; }
-            return true;
+
         }
 
         ///-------------------------------------------------------------------------------------------------
