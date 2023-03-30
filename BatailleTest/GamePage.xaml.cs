@@ -145,7 +145,11 @@ namespace BatailleTest
                     border.PointerEntered += Grid_PointerEntered;
                     border.Tapped += Grid_Tapped;
 
-
+                    border.Child = new Border()
+                    {
+                        Background = new SolidColorBrush(Windows.UI.Colors.Orange),
+                        Opacity = 0
+                    };
                 }
             }
         }
