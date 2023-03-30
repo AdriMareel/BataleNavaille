@@ -30,11 +30,11 @@
 
         </Grid>
         
-        <StackPanel Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
-            <Button x:Name="randomBtn" HorizontalAlignment="Center" Margin="10">
+        <StackPanel Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
+            <Button x:Name="randomBtn" HorizontalAlignment="Center" Margin="10" Click="randomBtn_Click">
                 Random ships
             </Button>
-            <Button x:Name="startBtn" HorizontalAlignment="Center" Margin="10" Padding="10">
+            <Button x:Name="startBtn" HorizontalAlignment="Center" Margin="10" Padding="10" Click="startBtn_Click">
                 Start
             </Button>
         </StackPanel>
