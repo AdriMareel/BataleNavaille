@@ -208,12 +208,8 @@ namespace BatailleTest
         private void removePreview()
         {
             foreach (Border border in this.gridPlayer1.Children)
-            {
-                Debug.WriteLine(border.Background);
-                if (border.Background == new SolidColorBrush(Windows.UI.Colors.LightBlue))
-                {
-                    border.Background = new SolidColorBrush(Windows.UI.Colors.Transparent);
-                }
+            { 
+                border.Background = new SolidColorBrush(Windows.UI.Colors.Transparent);
             }
         }
 
