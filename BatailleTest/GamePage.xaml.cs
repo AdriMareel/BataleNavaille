@@ -148,10 +148,15 @@ namespace BatailleTest
 
                     //set event listeners
                     rectangle.PointerEntered += Grid_PointerEntered;
-                    rectangle.RightTapped += Grid_RightTapped;
                     rectangle.Tapped += Grid_Tapped;
+                    rectangle.RightTapped += Rectangle_RightTapped;
                 }
             }
+        }
+
+        private void Rectangle_RightTapped(object sender, RightTappedRoutedEventArgs e)
+        {
+            this.vertical = !this.vertical;
         }
 
         private void Grid_Tapped(object sender, TappedRoutedEventArgs e)
@@ -212,10 +217,6 @@ namespace BatailleTest
                     rectangleFollowing.Fill = new SolidColorBrush(Windows.UI.Colors.LightBlue);
                 }
             }
-        }
-        private void Grid_RightTapped(object sender, TappedRoutedEventArgs e)
-        {
-            this.vertical = !this.vertical;
         }
 
         private void removePreview()
