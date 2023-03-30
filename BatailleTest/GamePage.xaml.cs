@@ -187,6 +187,23 @@ namespace BatailleTest
         
         private void refreshBoatView()
         {
+            int GRID_SIZE = this.game.GameRules.MapSize;
+
+            foreach (Rectangle rec in this.gridElements)
+            {
+                rec.Fill = new SolidColorBrush(Windows.UI.Colors.Black);
+            }
+
+            for (int a = 0; a < GRID_SIZE; a++)
+            {
+                for (int b = 0; b < GRID_SIZE; b++)
+                {
+                    this.playerBoatsCoords[a, b] = false;
+                }
+            }
+
+
+
             foreach (Ship ship in this.boardPlayer1.PlayerShips)
             {
                 foreach (ShipPiece piece in ship.ShipPieces)
