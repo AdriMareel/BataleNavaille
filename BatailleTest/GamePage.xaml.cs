@@ -39,7 +39,8 @@ namespace BatailleTest
         private Board boardPlayer2;
         private Grid gridBoatPlayer1;
         private Grid gridHitPlayer1;
-        private Rectangle[,] gridElements = new Rectangle[10,10];
+        private Rectangle[,] gridBoatElements = new Rectangle[10,10];
+        private Rectangle[,] gridHitElements = new Rectangle[10, 10];
         private bool[,] botBoatsCoords = new bool[10, 10];
         private bool[,] playerBoatsCoords = new bool[10, 10];
         private bool vertical = true;
@@ -134,7 +135,7 @@ namespace BatailleTest
                     rectangleBoat.Stroke = new SolidColorBrush(Windows.UI.Colors.White);
                     rectangleBoat.Fill = new SolidColorBrush(Windows.UI.Colors.LightBlue);
                     gridBoatPlayer1.Children.Add(rectangleBoat);
-                    this.gridElements[a, b] = rectangleBoat;
+                    this.gridBoatElements[a, b] = rectangleBoat;
 
                     Rectangle rectangleHit = new Rectangle();
                     rectangleHit.SetValue(Grid.ColumnProperty, b);
@@ -142,6 +143,7 @@ namespace BatailleTest
                     rectangleHit.Stroke = new SolidColorBrush(Windows.UI.Colors.White);
                     rectangleHit.Fill = new SolidColorBrush(Windows.UI.Colors.LightBlue);
                     gridHitPlayer1.Children.Add(rectangleHit);
+                    this.gridHitElements[a, b] = rectangleHit;
 
                     //set event listeners
                     rectangleBoat.PointerEntered += GridBoat_PointerEntered;
@@ -213,7 +215,7 @@ namespace BatailleTest
         {
             int GRID_SIZE = this.game.GameRules.MapSize;
 
-            foreach (Rectangle rec in this.gridElements)
+            foreach (Rectangle rec in this.gridBoatElements)
             {
                 rec.Fill = new SolidColorBrush(Windows.UI.Colors.LightBlue);
                 rec.Stroke = new SolidColorBrush(Windows.UI.Colors.White);
@@ -231,7 +233,7 @@ namespace BatailleTest
             {
                 foreach (ShipPiece piece in ship.ShipPieces)
                 {
-                    Rectangle rectangleFollowing = this.gridElements[piece.Position.Y, piece.Position.X];
+                    Rectangle rectangleFollowing = this.gridBoatElements[piece.Position.Y, piece.Position.X];
                     rectangleFollowing.Fill = new SolidColorBrush(Windows.UI.Colors.Orange);
                     rectangleFollowing.Stroke = new SolidColorBrush(Windows.UI.Colors.Orange);
                     this.playerBoatsCoords[piece.Position.Y, piece.Position.X] = true;
@@ -282,7 +284,7 @@ namespace BatailleTest
             {
                 if(this.player1.doesShipFit(boat, this.game.GameRules))
                 {
-                    Rectangle rectangleFollowing = this.gridElements[piece.Position.Y,piece.Position.X];
+                    Rectangle rectangleFollowing = this.gridBoatElements[piece.Position.Y,piece.Position.X];
                     rectangleFollowing.Fill = new SolidColorBrush(Windows.UI.Colors.LightCyan);
                     rectangleFollowing.Stroke = new SolidColorBrush(Windows.UI.Colors.LightCyan);
                 }
