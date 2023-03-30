@@ -29,7 +29,16 @@
         <Grid x:Name="gamePlayer1" Grid.Column="1" Grid.Row="1">
 
         </Grid>
-
+        
+        <StackPanel Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
+            <Button x:Name="randomBtn" HorizontalAlignment="Center" Margin="10">
+                Random ships
+            </Button>
+            <Button x:Name="startBtn" HorizontalAlignment="Center" Margin="10" Padding="10">
+                Start
+            </Button>
+        </StackPanel>
+        
         <Grid x:Name="gamePlayer2" Grid.Column="3" Grid.Row="1">
             
         </Grid>
