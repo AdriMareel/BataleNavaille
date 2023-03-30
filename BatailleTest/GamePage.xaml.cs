@@ -181,7 +181,12 @@ namespace BatailleTest
             Coordinates coord = new Coordinates(x, y);
             this.game.PlayTurn(coord, this.player1, this.vertical);
 
-            //refresh grid boart for player1
+            this.refreshView();
+
+        }
+        
+        private void refreshView()
+        {
             foreach (Ship ship in this.boardPlayer1.PlayerShips)
             {
                 foreach (ShipPiece piece in ship.ShipPieces)
