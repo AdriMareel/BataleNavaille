@@ -177,7 +177,7 @@ namespace BatailleTest.Game
         ///
         /// <returns>   An int. </returns>
 
-        public int PlayTurn(Coordinates coordinates, Player player = null)
+        public int PlayTurn(Coordinates coordinates, Player player = null, bool isVertical = true)
         {
             if (player == null)
                 player = _currentPlayer;
@@ -191,7 +191,11 @@ namespace BatailleTest.Game
                     if (player.GetMissingBoat(_gameRules).Count != 0)
                     {
                         Ship shipToPlace = player.GetMissingBoat(_gameRules).First();
-
+                        if (isVertical == false)
+                        {
+                            shipToPlace.changeDirection();
+                        }
+                       
                         this.AddAShip(player, shipToPlace);
                     }
 
