@@ -157,6 +157,15 @@ namespace BatailleTest
         private void Rectangle_RightTapped(object sender, RightTappedRoutedEventArgs e)
         {
             this.vertical = !this.vertical;
+
+            Rectangle rectangle = sender as Rectangle;
+            rectangle.Fill = new SolidColorBrush(Windows.UI.Colors.LightBlue);
+            // Obtenir les coordonnées de la case survolée
+            int x = Grid.GetColumn(rectangle);
+            int y = Grid.GetRow(rectangle);
+
+
+            this.generatePreview(x, y);
         }
 
         private void Grid_Tapped(object sender, TappedRoutedEventArgs e)
@@ -172,6 +181,7 @@ namespace BatailleTest
             List<Ship> missingBoatsPlayer = this.player1.GetMissingBoat(gameRules);
             var boat = missingBoatsPlayer[0];
 
+
             foreach (ShipPiece piece in boat.ShipPieces)
             {
                 Rectangle rectangleFollowing = this.gridElements[y + piece.Position.Y, x + piece.Position.X];
@@ -179,8 +189,8 @@ namespace BatailleTest
                 this.playerBoatsCoords[y + piece.Position.Y, x + piece.Position.X] = true;
             }
             Coordinates coord = new Coordinates(x, y);
-            this.game.PlayTurn(coord, this.player1);
-            
+            this.game.PlayTurn(coord, this.player1, this.vertical);
+
 
             Debug.WriteLine("bateau ajouté");
         }
@@ -188,34 +198,32 @@ namespace BatailleTest
 
         private void Grid_PointerEntered(object sender, PointerRoutedEventArgs e)
         {
-            removePreview();
-            
             Rectangle rectangle = sender as Rectangle;
             rectangle.Fill = new SolidColorBrush(Windows.UI.Colors.LightBlue);
-
             // Obtenir les coordonnées de la case survolée
             int x = Grid.GetColumn(rectangle);
             int y = Grid.GetRow(rectangle);
 
+
+            this.generatePreview(x, y);
+        }
+
+        private void generatePreview(int x, int y)
+        {
+            removePreview();
             // Obtenir la liste des bateaux manquants pour le joueur 1
             List<Ship> missingBoatsPlayer = this.player1.GetMissingBoat(gameRules);
             var boat = missingBoatsPlayer[0];
 
             if (!this.vertical)
             {
-                foreach (ShipPiece piece in boat.ShipPieces)
-                {
-                    Rectangle rectangleFollowing = this.gridElements[x + piece.Position.X, y + piece.Position.Y];
-                    rectangleFollowing.Fill = new SolidColorBrush(Windows.UI.Colors.LightBlue);
-                }
+                boat.ChangeDirection();
             }
-            else
+
+            foreach (ShipPiece piece in boat.ShipPieces)
             {
-                foreach (ShipPiece piece in boat.ShipPieces)
-                {
-                    Rectangle rectangleFollowing = this.gridElements[y + piece.Position.Y, x + piece.Position.X];
-                    rectangleFollowing.Fill = new SolidColorBrush(Windows.UI.Colors.LightBlue);
-                }
+                Rectangle rectangleFollowing = this.gridElements[y + piece.Position.Y, x + piece.Position.X];
+                rectangleFollowing.Fill = new SolidColorBrush(Windows.UI.Colors.LightBlue);
             }
         }
 
