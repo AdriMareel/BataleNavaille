@@ -191,9 +191,10 @@ namespace BatailleTest.Game
                     if (player.GetMissingBoat(_gameRules).Count != 0)
                     {
                         Ship shipToPlace = player.GetMissingBoat(_gameRules).First();
+                        shipToPlace.StartPosition = coordinates;
                         if (isVertical == false)
                         {
-                            shipToPlace.changeDirection();
+                            shipToPlace.ChangeDirection();
                         }
                        
                         this.AddAShip(player, shipToPlace);
