@@ -37,8 +37,8 @@ namespace BatailleTest
         private Game.entity.Player player2;
         private Board boardPlayer1;
         private Board boardPlayer2;
-        private Grid gridPlayer1;
-        private Grid gridPlayer2;
+        private Grid gridBoatPlayer1;
+        private Grid gridHitPlayer1;
         private Rectangle[,] gridElements = new Rectangle[10,10];
         private bool[,] botBoatsCoords = new bool[10, 10];
         private bool[,] playerBoatsCoords = new bool[10, 10];
@@ -70,10 +70,10 @@ namespace BatailleTest
             this.boardPlayer2 = game.PlayerTwoBoard;
             this.player2.RandomShips(gameRules);
             this.botBoatsCoords = getAIBoatsCoords(player2);
-            this.gridPlayer1 = gamePlayer1;
-            this.gridPlayer2 = gamePlayer2;
+            this.gridBoatPlayer1 = gamePlayer1;
+            this.gridHitPlayer1 = gamePlayer2;
 
-            initGridsView(this.gridPlayer1, this.gridPlayer2, this.botBoatsCoords);
+            initGridsView(this.gridBoatPlayer1, this.gridHitPlayer1, this.botBoatsCoords);
 
             List<Ship> missingBoatsPlayer = player1.GetMissingBoat(gameRules);
 
@@ -85,7 +85,7 @@ namespace BatailleTest
 
         private bool[,] getAIBoatsCoords(Player player2)
         {
-            const int GRID_SIZE = 10;
+            int GRID_SIZE = this.game.GameRules.MapSize;
             bool[,] botBoatsCoords = new bool[GRID_SIZE, GRID_SIZE];
 
             foreach (var ship in player2.Ships)
@@ -100,7 +100,7 @@ namespace BatailleTest
 
         private void initGridsView(Grid gridPlayer1, Grid gridPlayer2, bool[,] botBoatsCoords)
         {
-            const int GRID_SIZE = 10;
+            int GRID_SIZE = this.game.GameRules.MapSize;
             //créations des grilles pour l'interface en fonction de la GRID_SIZE choisie pour le joueur 
             for (int i = 0; i < GRID_SIZE; i++)
             {
@@ -260,7 +260,7 @@ namespace BatailleTest
 
         private void removePreview()
         {
-            foreach (Rectangle rectangle in this.gridPlayer1.Children)
+            foreach (Rectangle rectangle in this.gridBoatPlayer1.Children)
             {
                 rectangle.Fill = new SolidColorBrush(Windows.UI.Colors.Transparent);
                 int x = Grid.GetColumn(rectangle);
