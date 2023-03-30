@@ -159,7 +159,7 @@ namespace BatailleTest
 
         private void GridHit_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            return;
         }
 
         private void RectangleHit_RightTapped(object sender, RightTappedRoutedEventArgs e)
@@ -227,8 +227,6 @@ namespace BatailleTest
                 }
             }
 
-
-
             foreach (Ship ship in this.boardPlayer1.PlayerShips)
             {
                 foreach (ShipPiece piece in ship.ShipPieces)
@@ -239,6 +237,11 @@ namespace BatailleTest
                     this.playerBoatsCoords[piece.Position.Y, piece.Position.X] = true;
                 }
             }
+        }
+
+        private void refreshPlayerHitView()
+        {
+
         }
 
 
@@ -314,7 +317,7 @@ namespace BatailleTest
         }
         private void startBtn_Click(object sender, RoutedEventArgs e)
         {
-            
+            this.game.Start(); 
         }
     }
 }
