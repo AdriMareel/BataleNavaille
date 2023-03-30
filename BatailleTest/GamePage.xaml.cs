@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Devices.Display.Core;
 using Windows.Foundation;
@@ -40,6 +41,7 @@ namespace BatailleTest
         private Rectangle[,] gridElements = new Rectangle[10,10];
         private bool[,] botBoatsCoords = new bool[10, 10];
         private bool[,] playerBoatsCoords = new bool[10, 10];
+        private bool vertical = true;
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -125,15 +127,6 @@ namespace BatailleTest
             {
                 for (int b = 0; b < GRID_SIZE; b++)
                 {
-                    //ajout des borders aux grids 
-                    /*Border border = new Border();
-                    border.BorderBrush = new SolidColorBrush(Windows.UI.Colors.White);
-                    border.BorderThickness = new Thickness(0.5);
-                    border.SetValue(Grid.ColumnProperty, b);
-                    border.SetValue(Grid.RowProperty, a);
-                    gridPlayer1.Children.Add(border);*/
-
-                    //create rectangle 
                     Rectangle rectangle = new Rectangle();
                     rectangle.SetValue(Grid.ColumnProperty, b);
                     rectangle.SetValue(Grid.RowProperty, a);
@@ -155,6 +148,7 @@ namespace BatailleTest
 
                     //set event listeners
                     rectangle.PointerEntered += Grid_PointerEntered;
+                    rectangle.RightTapped += Grid_RightTapped;
                     rectangle.Tapped += Grid_Tapped;
                 }
             }
@@ -185,7 +179,8 @@ namespace BatailleTest
 
             Debug.WriteLine("bateau ajouté");
         }
-        
+
+
         private void Grid_PointerEntered(object sender, PointerRoutedEventArgs e)
         {
             removePreview();
@@ -201,11 +196,26 @@ namespace BatailleTest
             List<Ship> missingBoatsPlayer = this.player1.GetMissingBoat(gameRules);
             var boat = missingBoatsPlayer[0];
 
-            foreach (ShipPiece piece in boat.ShipPieces)
+            if (!this.vertical)
             {
-                Rectangle rectangleFollowing = this.gridElements[y + piece.Position.Y, x + piece.Position.X];
-                rectangleFollowing.Fill = new SolidColorBrush(Windows.UI.Colors.LightBlue);
+                foreach (ShipPiece piece in boat.ShipPieces)
+                {
+                    Rectangle rectangleFollowing = this.gridElements[x + piece.Position.X, y + piece.Position.Y];
+                    rectangleFollowing.Fill = new SolidColorBrush(Windows.UI.Colors.LightBlue);
+                }
             }
+            else
+            {
+                foreach (ShipPiece piece in boat.ShipPieces)
+                {
+                    Rectangle rectangleFollowing = this.gridElements[y + piece.Position.Y, x + piece.Position.X];
+                    rectangleFollowing.Fill = new SolidColorBrush(Windows.UI.Colors.LightBlue);
+                }
+            }
+        }
+        private void Grid_RightTapped(object sender, TappedRoutedEventArgs e)
+        {
+            this.vertical = !this.vertical;
         }
 
         private void removePreview()
@@ -217,16 +227,7 @@ namespace BatailleTest
                 int y = Grid.GetRow(rectangle);
                 if (this.playerBoatsCoords[y, x])
                 {
-                    rectangle.Fill = new SolidColorBrush(Windows.UI.Colors.Blue);
-                    
-                }
-            }
-            
-            for (int i = 0; i < 10; i++)
-            {
-                for (int j = 0; j < 10; j++)
-                {
-                    Debug.WriteLine(this.playerBoatsCoords[j, i]);
+                    rectangle.Fill = new SolidColorBrush(Windows.UI.Colors.Blue); 
                 }
             }
         }
