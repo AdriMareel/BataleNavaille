@@ -58,7 +58,7 @@ namespace BatailleTest.Game.entity
             }
         }
 
-        public void changeDirection()
+        public void ChangeDirection()
         {
             _isVertical=!_isVertical;
             generateBoatPieces();
