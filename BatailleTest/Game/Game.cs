@@ -135,9 +135,17 @@ namespace BatailleTest.Game
             get { return _playerTwoBoard; }
         }
 
-        public void Start()
+        public int Start()
         {
-            //TODO
+            if (Player1.GetMissingBoat(_gameRules).Count == 0 && Player2.GetMissingBoat(_gameRules).Count == 0)
+            {
+                _gameState.State = GameStates.States.Playing;
+                return 0;
+            }
+            else
+            {
+                return 1;
+            }
         }
 
         ///-------------------------------------------------------------------------------------------------
@@ -184,8 +192,6 @@ namespace BatailleTest.Game
 
             try
             {
-
-
                 if (_gameState.State == GameStates.States.Warmup)
                 {
                     if (player.GetMissingBoat(_gameRules).Count != 0)
@@ -199,17 +205,7 @@ namespace BatailleTest.Game
                        
                         this.AddAShip(player, shipToPlace);
                     }
-
-
-                    if (Player1.GetMissingBoat(_gameRules).Count == 0 && Player2.GetMissingBoat(_gameRules).Count == 0)
-                    {
-                        _gameState.State = GameStates.States.Playing;
-                        return 0;
-                    }
-                    else
-                    {
-                        return 1;
-                    }
+                    return 0;
 
                 }
                 else if (_gameState.State == GameStates.States.Playing)
