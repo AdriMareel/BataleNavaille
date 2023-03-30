@@ -228,8 +228,8 @@ namespace BatailleTest
                 foreach (ShipPiece piece in ship.ShipPieces)
                 {
                     Rectangle rectangleFollowing = this.gridElements[piece.Position.Y, piece.Position.X];
-                    rectangleFollowing.Fill = new SolidColorBrush(Windows.UI.Colors.Red);
-                    rectangleFollowing.Stroke = new SolidColorBrush(Windows.UI.Colors.Red);
+                    rectangleFollowing.Fill = new SolidColorBrush(Windows.UI.Colors.Orange);
+                    rectangleFollowing.Stroke = new SolidColorBrush(Windows.UI.Colors.Orange);
                     this.playerBoatsCoords[piece.Position.Y, piece.Position.X] = true;
                 }
             }
@@ -239,8 +239,8 @@ namespace BatailleTest
         private void GridBoat_PointerEntered(object sender, PointerRoutedEventArgs e)
         {
             Rectangle rectangle = sender as Rectangle;
-            rectangle.Fill = new SolidColorBrush(Windows.UI.Colors.Red);
-            rectangle.Stroke = new SolidColorBrush(Windows.UI.Colors.Red);
+            rectangle.Fill = new SolidColorBrush(Windows.UI.Colors.Orange);
+            rectangle.Stroke = new SolidColorBrush(Windows.UI.Colors.Orange);
             // Obtenir les coordonnées de la case survolée
             int x = Grid.GetColumn(rectangle);
             int y = Grid.GetRow(rectangle);
@@ -274,8 +274,8 @@ namespace BatailleTest
                 if(this.player1.doesShipFit(boat, this.game.GameRules))
                 {
                     Rectangle rectangleFollowing = this.gridElements[piece.Position.Y,piece.Position.X];
-                    rectangleFollowing.Fill = new SolidColorBrush(Windows.UI.Colors.Orange);
-                    rectangleFollowing.Stroke = new SolidColorBrush(Windows.UI.Colors.Orange);
+                    rectangleFollowing.Fill = new SolidColorBrush(Windows.UI.Colors.LightCyan);
+                    rectangleFollowing.Stroke = new SolidColorBrush(Windows.UI.Colors.LightCyan);
                 }
             }
         }
@@ -291,8 +291,8 @@ namespace BatailleTest
                 int y = Grid.GetRow(rectangle);
                 if (this.playerBoatsCoords[y, x])
                 {
-                    rectangle.Fill = new SolidColorBrush(Windows.UI.Colors.Red);
-                    rectangle.Stroke = new SolidColorBrush(Windows.UI.Colors.Red);
+                    rectangle.Fill = new SolidColorBrush(Windows.UI.Colors.Orange);
+                    rectangle.Stroke = new SolidColorBrush(Windows.UI.Colors.Orange);
                 }
             }
         }
