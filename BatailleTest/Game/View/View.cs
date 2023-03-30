@@ -53,11 +53,11 @@ namespace BatailleTest.Game.View
                 tmpShip.Add(coords);
                 if (ship.IsVertical)
                 {
-                    coords.X += 1;
+                    coords.Y += 1;
                 }
                 else
                 {
-                    coords.Y+= 1;
+                    coords.X+= 1;
                 }
             }
             return tmpShip;
