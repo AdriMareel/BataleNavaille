@@ -9,11 +9,31 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <TextBox x:Name="namePlayer1" HorizontalAlignment="Left" Margin="347,376,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" TextChanged="TextBox_TextChanged" RenderTransformOrigin="0.771,2.812" Width="150"/>
-        <TextBox x:Name="namePlayer2" HorizontalAlignment="Left" Margin="798,376,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" TextChanged="TextBox_TextChanged" RenderTransformOrigin="0.771,2.812" Width="150"/>
-        <TextBlock FontSize="50px" HorizontalAlignment="Left" Margin="478,115,0,0" TextWrapping="Wrap" Text="Bataille Navale" VerticalAlignment="Top" Height="82" Width="332" SelectionChanged="TextBlock_SelectionChanged"/>
-        <TextBlock HorizontalAlignment="Left" Margin="347,333,0,0" TextWrapping="Wrap" Text="Player1" VerticalAlignment="Top" RenderTransformOrigin="0.677,0.609"/>
-        <TextBlock HorizontalAlignment="Left" Margin="798,341,0,0" TextWrapping="Wrap" Text="Player2" VerticalAlignment="Top"/>
-        <Button Content="Play" Margin="0,532,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.242,-0.469" Click="Button_Click" HorizontalAlignment="Center" Width="67"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+          
+        <TextBlock FontSize="50px" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Bataille Navale" VerticalAlignment="Center"/>
+
+        <StackPanel Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" >
+            <TextBlock HorizontalAlignment="Center"  TextWrapping="Wrap" Text="Player1" VerticalAlignment="Center"/>
+            <TextBox x:Name="namePlayer1" HorizontalAlignment="Center" TextWrapping="Wrap" Text="" VerticalAlignment="Center" TextChanged="TextBox_TextChanged" Width="150"/>
+        </StackPanel>
+        
+        <TextBlock FontSize="50px" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" TextWrapping="Wrap" Text="V S" VerticalAlignment="Center"/>
+
+        <StackPanel Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Player2" VerticalAlignment="Center"/>
+            <TextBox x:Name="namePlayer2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="" VerticalAlignment="Center" TextChanged="TextBox_TextChanged" Width="150"/>
+        </StackPanel> 
+        
+        <Button Content="Play" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center"  Click="Button_Click" HorizontalAlignment="Center" />
     </Grid>
 </Page>
