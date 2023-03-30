@@ -163,7 +163,21 @@ namespace BatailleTest
 
         private void GridHit_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            return;
+            if (!this.game.isGameStarted())
+            {
+                return;
+            }
+            Rectangle rectangle = sender as Rectangle;
+
+            // Obtenir les coordonnées de la case survolée
+            int x = Grid.GetColumn(rectangle);
+            int y = Grid.GetRow(rectangle);
+
+
+            Coordinates coord = new Coordinates(x, y);
+            this.game.PlayTurn(coord, this.player1, this.vertical);
+
+            this.refreshPlayerHitView();
         }
 
         private void RectangleHit_RightTapped(object sender, RightTappedRoutedEventArgs e)
@@ -245,7 +259,26 @@ namespace BatailleTest
 
         private void refreshPlayerHitView()
         {
+            foreach(Hit hit in this.boardPlayer1.PlayerShots)
+            {
+                Rectangle rectangle = this.gridHitElements[hit.Position.Y, hit.Position.X];
 
+                SolidColorBrush color = new SolidColorBrush(Windows.UI.Colors.White);
+
+                if(hit.Status == Hit.StatusType.miss)
+                {
+                    color = new SolidColorBrush(Windows.UI.Colors.BlueViolet);
+                }
+                else 
+                if(hit.Status == Hit.StatusType.hit)
+                {
+                    color = new SolidColorBrush(Windows.UI.Colors.DarkRed);
+                }
+
+                rectangle.Fill = color;
+                rectangle.Stroke = color;
+
+            }
         }
 
 
