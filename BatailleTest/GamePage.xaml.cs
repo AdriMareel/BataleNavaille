@@ -12,6 +12,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Devices.Display.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Media.Protection;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -176,17 +177,6 @@ namespace BatailleTest
             int x = Grid.GetColumn(rectangle);
             int y = Grid.GetRow(rectangle);
 
-            // Obtenir la liste des bateaux manquants pour le joueur 1
-            //List<Ship> missingBoatsPlayer = this.player1.GetMissingBoat(gameRules);
-            //var boat = missingBoatsPlayer[0];
-
-
-            //foreach (ShipPiece piece in boat.ShipPieces)
-            //{
-            //    Rectangle rectangleFollowing = this.gridElements[y + piece.Position.Y, x + piece.Position.X];
-            //    rectangleFollowing.Fill = new SolidColorBrush(Windows.UI.Colors.Blue);
-            //    this.playerBoatsCoords[y + piece.Position.Y, x + piece.Position.X] = true;
-            //}
 
             Coordinates coord = new Coordinates(x, y);
             this.game.PlayTurn(coord, this.player1, this.vertical);
@@ -201,11 +191,6 @@ namespace BatailleTest
                     this.playerBoatsCoords[piece.Position.Y, piece.Position.X] = true;
                 }
             }
-
-            this.boardPlayer1.DebugPlayerShipsDisplay();
-
-
-
         }
 
 
@@ -234,23 +219,20 @@ namespace BatailleTest
                 return;
             }
             var boat = missingBoatsPlayer[0];
-            //boat.StartPosition = coord;
-
+            boat.StartPosition = coord;
+            
             if (!this.vertical)
             {
                 boat.ChangeDirection();
             }
-            /*
-            if (!this.player1.doesShipFit(boat, this.game.GameRules)) {
-                Rectangle rectangle = this.gridElements[y, x];
-                rectangle.Fill = new SolidColorBrush(Windows.UI.Colors.Red);
-                return;
-            }*/
 
             foreach (ShipPiece piece in boat.ShipPieces)
             {
-                Rectangle rectangleFollowing = this.gridElements[y + piece.Position.Y, x + piece.Position.X];
-                rectangleFollowing.Fill = new SolidColorBrush(Windows.UI.Colors.LightBlue);
+                if(this.player1.doesShipFit(boat, this.game.GameRules))
+                {
+                    Rectangle rectangleFollowing = this.gridElements[piece.Position.Y,piece.Position.X];
+                    rectangleFollowing.Fill = new SolidColorBrush(Windows.UI.Colors.LightBlue);
+                }
             }
         }
 
