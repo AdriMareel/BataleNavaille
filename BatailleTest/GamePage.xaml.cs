@@ -162,12 +162,18 @@ namespace BatailleTest
 
         private void RectangleHit_RightTapped(object sender, RightTappedRoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            return;
         }
 
         private void GridHit_PointerEntered(object sender, PointerRoutedEventArgs e)
-        {
-            throw new NotImplementedException();
+        {    
+            if(!this.game.isGameStarted())
+            {
+                return;
+            }
+            
+            Rectangle rectangle = sender as Rectangle;
+            rectangle.Fill = new SolidColorBrush(Windows.UI.Colors.Yellow);
         }
 
         private void RectangleBoat_RightTapped(object sender, RightTappedRoutedEventArgs e)

@@ -338,7 +338,12 @@ namespace BatailleTest.Game
                 return _player2;    
             }
             else { return null; }
-        }       
+        }
+        
+        public bool isGameStarted()
+        {
+            return _gameState.State == GameStates.States.Playing;
+        }
 
     }
 }
