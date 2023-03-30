@@ -112,7 +112,7 @@ namespace BatailleTest.Game.entity
             foreach (ShipPiece shipPiece in ship.ShipPieces)
             {
                 var boardSize = rules.MapSize;
-                if (shipPiece.Position.X > boardSize || shipPiece.Position.Y > boardSize || shipPiece.Position.X < 0 || shipPiece.Position.Y < 0)
+                if (shipPiece.Position.X >= boardSize || shipPiece.Position.Y >= boardSize || shipPiece.Position.X < 0 || shipPiece.Position.Y < 0)
                 {
                     return false;
                 }
