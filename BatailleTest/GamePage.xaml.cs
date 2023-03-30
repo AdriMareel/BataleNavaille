@@ -132,6 +132,7 @@ namespace BatailleTest
                     rectangleBoat.SetValue(Grid.ColumnProperty, b);
                     rectangleBoat.SetValue(Grid.RowProperty, a);
                     rectangleBoat.Stroke = new SolidColorBrush(Windows.UI.Colors.White);
+                    rectangleBoat.Fill = new SolidColorBrush(Windows.UI.Colors.LightBlue);
                     gridBoatPlayer1.Children.Add(rectangleBoat);
                     this.gridElements[a, b] = rectangleBoat;
 
@@ -139,6 +140,7 @@ namespace BatailleTest
                     rectangleHit.SetValue(Grid.ColumnProperty, b);
                     rectangleHit.SetValue(Grid.RowProperty, a);
                     rectangleHit.Stroke = new SolidColorBrush(Windows.UI.Colors.White);
+                    rectangleHit.Fill = new SolidColorBrush(Windows.UI.Colors.LightBlue);
                     gridHitPlayer1.Children.Add(rectangleHit);
 
                     //set event listeners
@@ -155,6 +157,7 @@ namespace BatailleTest
 
             Rectangle rectangle = sender as Rectangle;
             rectangle.Fill = new SolidColorBrush(Windows.UI.Colors.LightBlue);
+            rectangle.Stroke = new SolidColorBrush(Windows.UI.Colors.White);
             // Obtenir les coordonnées de la case survolée
             int x = Grid.GetColumn(rectangle);
             int y = Grid.GetRow(rectangle);
@@ -185,7 +188,8 @@ namespace BatailleTest
 
             foreach (Rectangle rec in this.gridElements)
             {
-                rec.Fill = new SolidColorBrush(Windows.UI.Colors.Black);
+                rec.Fill = new SolidColorBrush(Windows.UI.Colors.LightBlue);
+                rec.Stroke = new SolidColorBrush(Windows.UI.Colors.White);
             }
 
             for (int a = 0; a < GRID_SIZE; a++)
@@ -203,7 +207,8 @@ namespace BatailleTest
                 foreach (ShipPiece piece in ship.ShipPieces)
                 {
                     Rectangle rectangleFollowing = this.gridElements[piece.Position.Y, piece.Position.X];
-                    rectangleFollowing.Fill = new SolidColorBrush(Windows.UI.Colors.Blue);
+                    rectangleFollowing.Fill = new SolidColorBrush(Windows.UI.Colors.Red);
+                    rectangleFollowing.Stroke = new SolidColorBrush(Windows.UI.Colors.Red);
                     this.playerBoatsCoords[piece.Position.Y, piece.Position.X] = true;
                 }
             }
@@ -213,7 +218,8 @@ namespace BatailleTest
         private void Grid_PointerEntered(object sender, PointerRoutedEventArgs e)
         {
             Rectangle rectangle = sender as Rectangle;
-            rectangle.Fill = new SolidColorBrush(Windows.UI.Colors.LightBlue);
+            rectangle.Fill = new SolidColorBrush(Windows.UI.Colors.Red);
+            rectangle.Stroke = new SolidColorBrush(Windows.UI.Colors.Red);
             // Obtenir les coordonnées de la case survolée
             int x = Grid.GetColumn(rectangle);
             int y = Grid.GetRow(rectangle);
@@ -247,7 +253,8 @@ namespace BatailleTest
                 if(this.player1.doesShipFit(boat, this.game.GameRules))
                 {
                     Rectangle rectangleFollowing = this.gridElements[piece.Position.Y,piece.Position.X];
-                    rectangleFollowing.Fill = new SolidColorBrush(Windows.UI.Colors.LightBlue);
+                    rectangleFollowing.Fill = new SolidColorBrush(Windows.UI.Colors.Orange);
+                    rectangleFollowing.Stroke = new SolidColorBrush(Windows.UI.Colors.Orange);
                 }
             }
         }
@@ -256,12 +263,15 @@ namespace BatailleTest
         {
             foreach (Rectangle rectangle in this.gridBoatPlayer1.Children)
             {
-                rectangle.Fill = new SolidColorBrush(Windows.UI.Colors.Transparent);
+                rectangle.Fill = new SolidColorBrush(Windows.UI.Colors.LightBlue);
+                rectangle.Stroke = new SolidColorBrush(Windows.UI.Colors.White);
+
                 int x = Grid.GetColumn(rectangle);
                 int y = Grid.GetRow(rectangle);
                 if (this.playerBoatsCoords[y, x])
                 {
-                    rectangle.Fill = new SolidColorBrush(Windows.UI.Colors.Blue); 
+                    rectangle.Fill = new SolidColorBrush(Windows.UI.Colors.Red);
+                    rectangle.Stroke = new SolidColorBrush(Windows.UI.Colors.Red);
                 }
             }
         }
