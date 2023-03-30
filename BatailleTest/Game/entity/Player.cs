@@ -209,6 +209,14 @@ namespace BatailleTest.Game.entity
         public string RandomShips(GameRules rules)
         {
             List<Ship> missing = GetMissingBoat(rules);
+
+            if (missing.Count == 0)
+            {
+                this.Ships.Clear();
+                missing = GetMissingBoat(rules);
+            }
+            
+
             Random r = new Random();
 
             int SAFETY_LIMIT = Const.MAX_TRY;

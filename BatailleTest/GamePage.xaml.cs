@@ -258,7 +258,7 @@ namespace BatailleTest
         private void randomBtn_Click(object sender, RoutedEventArgs e)
         {
             this.game.CurrentPlayer.RandomShips(this.game.GameRules);
-            this.refreshView();
+            this.refreshBoatView();
         }
         private void startBtn_Click(object sender, RoutedEventArgs e)
         {
