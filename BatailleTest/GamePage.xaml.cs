@@ -98,7 +98,7 @@ namespace BatailleTest
             return botBoatsCoords;
         }
 
-        private void initGridsView(Grid gridPlayer1, Grid gridPlayer2, bool[,] botBoatsCoords)
+        private void initGridsView(Grid gridBoatPlayer1, Grid gridHitPlayer1, bool[,] botBoatsCoords)
         {
             int GRID_SIZE = this.game.GameRules.MapSize;
             //créations des grilles pour l'interface en fonction de la GRID_SIZE choisie pour le joueur 
@@ -106,51 +106,45 @@ namespace BatailleTest
             {
                 ColumnDefinition c = new ColumnDefinition();
                 c.Width = new GridLength(1, GridUnitType.Star);
-                gridPlayer1.ColumnDefinitions.Add(c);
+                gridBoatPlayer1.ColumnDefinitions.Add(c);
 
                 RowDefinition r = new RowDefinition();
                 r.Height = new GridLength(1, GridUnitType.Star);
-                gridPlayer1.RowDefinitions.Add(r);
+                gridBoatPlayer1.RowDefinitions.Add(r);
             }
 
             for (int i = 0; i < GRID_SIZE; i++)
             {
                 ColumnDefinition c = new ColumnDefinition();
                 c.Width = new GridLength(1, GridUnitType.Star);
-                gridPlayer2.ColumnDefinitions.Add(c);
+                gridHitPlayer1.ColumnDefinitions.Add(c);
 
                 RowDefinition r = new RowDefinition();
                 r.Height = new GridLength(1, GridUnitType.Star);
-                gridPlayer2.RowDefinitions.Add(r);
+                gridHitPlayer1.RowDefinitions.Add(r);
             }
 
             for (int a = 0; a < GRID_SIZE; a++)
             {
                 for (int b = 0; b < GRID_SIZE; b++)
                 {
-                    Rectangle rectangle = new Rectangle();
-                    rectangle.SetValue(Grid.ColumnProperty, b);
-                    rectangle.SetValue(Grid.RowProperty, a);
-                    rectangle.Stroke = new SolidColorBrush(Windows.UI.Colors.White);
-                    gridPlayer1.Children.Add(rectangle);
-                    this.gridElements[a, b] = rectangle;
+                    Rectangle rectangleBoat = new Rectangle();
+                    rectangleBoat.SetValue(Grid.ColumnProperty, b);
+                    rectangleBoat.SetValue(Grid.RowProperty, a);
+                    rectangleBoat.Stroke = new SolidColorBrush(Windows.UI.Colors.White);
+                    gridBoatPlayer1.Children.Add(rectangleBoat);
+                    this.gridElements[a, b] = rectangleBoat;
 
-                    Rectangle rectangle2 = new Rectangle();
-                    rectangle2.SetValue(Grid.ColumnProperty, b);
-                    rectangle2.SetValue(Grid.RowProperty, a);
-                    rectangle2.Stroke = new SolidColorBrush(Windows.UI.Colors.White);
-                    gridPlayer2.Children.Add(rectangle2);
-
-                    //affichage des coords des bateaux de l'IA
-                    if (botBoatsCoords[a, b])
-                    {
-                        rectangle2.Fill = new SolidColorBrush(Windows.UI.Colors.Red);
-                    }
+                    Rectangle rectangleHit = new Rectangle();
+                    rectangleHit.SetValue(Grid.ColumnProperty, b);
+                    rectangleHit.SetValue(Grid.RowProperty, a);
+                    rectangleHit.Stroke = new SolidColorBrush(Windows.UI.Colors.White);
+                    gridHitPlayer1.Children.Add(rectangleHit);
 
                     //set event listeners
-                    rectangle.PointerEntered += Grid_PointerEntered;
-                    rectangle.Tapped += Grid_Tapped;
-                    rectangle.RightTapped += Rectangle_RightTapped;
+                    rectangleBoat.PointerEntered += Grid_PointerEntered;
+                    rectangleBoat.Tapped += Grid_Tapped;
+                    rectangleBoat.RightTapped += Rectangle_RightTapped;
                 }
             }
         }
