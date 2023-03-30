@@ -26,7 +26,7 @@
         <TextBlock x:Name="player1Name" Margin="0,0,0,20" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom">Player1</TextBlock>
         <TextBlock x:Name="player2Name" Margin="0,0,0,20" Grid.Column="3" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom">Player2</TextBlock>
 
-        <Grid x:Name="gamePlayer1" Grid.Column="1" Grid.Row="1">
+        <Grid x:Name="gamePlayer1" Grid.Column="1" Grid.Row="1" CornerRadius="10">
 
         </Grid>
         
@@ -42,7 +42,7 @@
             </Button>
         </StackPanel>
         
-        <Grid x:Name="gamePlayer2" Grid.Column="3" Grid.Row="1">
+        <Grid x:Name="gamePlayer2" Grid.Column="3" Grid.Row="1" CornerRadius="10">
             
         </Grid>
     </Grid>
