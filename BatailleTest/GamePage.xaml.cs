@@ -17,6 +17,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI.Xaml.Shapes;
 
 // Pour plus d'informations sur le modèle d'élément Page vierge, consultez la page https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -35,6 +36,7 @@ namespace BatailleTest
         private Board boardPlayer2;
         private Grid gridPlayer1;
         private Grid gridPlayer2;
+        private Rectangle[,] gridElements = new Rectangle[10,10];
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -65,7 +67,7 @@ namespace BatailleTest
             this.gridPlayer1 = gamePlayer1;
             this.gridPlayer2 = gamePlayer2;
 
-            initGridsView(gridPlayer1, gridPlayer2, botBoatsCoords);
+            initGridsView(this.gridPlayer1, this.gridPlayer2, botBoatsCoords);
 
             List<Ship> missingBoatsPlayer = player1.GetMissingBoat(gameRules);
 
@@ -121,35 +123,36 @@ namespace BatailleTest
                 for (int b = 0; b < GRID_SIZE; b++)
                 {
                     //ajout des borders aux grids 
-                    Border border = new Border();
+                    /*Border border = new Border();
                     border.BorderBrush = new SolidColorBrush(Windows.UI.Colors.White);
                     border.BorderThickness = new Thickness(0.5);
                     border.SetValue(Grid.ColumnProperty, b);
                     border.SetValue(Grid.RowProperty, a);
-                    gridPlayer1.Children.Add(border);
+                    gridPlayer1.Children.Add(border);*/
 
-                    Border border2 = new Border();
-                    border2.BorderBrush = new SolidColorBrush(Windows.UI.Colors.White);
-                    border2.BorderThickness = new Thickness(0.5);
-                    border2.SetValue(Grid.ColumnProperty, b);
-                    border2.SetValue(Grid.RowProperty, a);
+                    //create rectangle 
+                    Rectangle rectangle = new Rectangle();
+                    rectangle.SetValue(Grid.ColumnProperty, b);
+                    rectangle.SetValue(Grid.RowProperty, a);
+                    rectangle.Stroke = new SolidColorBrush(Windows.UI.Colors.White);
+                    gridPlayer1.Children.Add(rectangle);
+                    this.gridElements[a, b] = rectangle;
+
+                    Rectangle rectangle2 = new Rectangle();
+                    rectangle2.SetValue(Grid.ColumnProperty, b);
+                    rectangle2.SetValue(Grid.RowProperty, a);
+                    rectangle2.Stroke = new SolidColorBrush(Windows.UI.Colors.White);
+                    gridPlayer2.Children.Add(rectangle2);
 
                     //affichage des coords des bateaux de l'IA
                     if (botBoatsCoords[a, b])
                     {
-                        border2.Background = new SolidColorBrush(Windows.UI.Colors.Red);
+                        rectangle2.Fill = new SolidColorBrush(Windows.UI.Colors.Red);
                     }
-                    gridPlayer2.Children.Add(border2);
 
                     //set event listeners
-                    border.PointerEntered += Grid_PointerEntered;
-                    border.Tapped += Grid_Tapped;
-
-                    border.Child = new Border()
-                    {
-                        Background = new SolidColorBrush(Windows.UI.Colors.Orange),
-                        Opacity = 0
-                    };
+                    rectangle.PointerEntered += Grid_PointerEntered;
+                    rectangle.Tapped += Grid_Tapped;
                 }
             }
         }
@@ -169,11 +172,8 @@ namespace BatailleTest
 
             foreach (ShipPiece piece in boat.ShipPieces)
             {
-                Border previewBorder = new Border();
-                previewBorder.Background = new SolidColorBrush(Windows.UI.Colors.Blue);
-                previewBorder.SetValue(Grid.ColumnProperty, piece.Position.X);
-                previewBorder.SetValue(Grid.RowProperty, piece.Position.Y);
-                gridPlayer1.Children.Add(previewBorder);
+                Rectangle rectangle = this.gridElements[piece.Position.Y, piece.Position.X];
+                rectangle.Fill = new SolidColorBrush(Windows.UI.Colors.Blue);
             }
             this.player1.AddShip(boat, this.gameRules);
 
@@ -184,12 +184,12 @@ namespace BatailleTest
         {
             removePreview();
             Debug.WriteLine("removePreview Launched");
-            Border border = sender as Border;
-            border.Background = new SolidColorBrush(Windows.UI.Colors.Blue);
+            Rectangle rectangle = sender as Rectangle;
+            rectangle.Fill = new SolidColorBrush(Windows.UI.Colors.LightBlue);
 
             // Obtenir les coordonnées de la case survolée
-            int x = Grid.GetColumn(border);
-            int y = Grid.GetRow(border);
+            int x = Grid.GetColumn(rectangle);
+            int y = Grid.GetRow(rectangle);
 
             // Obtenir la liste des bateaux manquants pour le joueur 1
             List<Ship> missingBoatsPlayer = this.player1.GetMissingBoat(gameRules);
@@ -197,19 +197,16 @@ namespace BatailleTest
 
             foreach (ShipPiece piece in boat.ShipPieces)
             {
-                Border previewBorder = new Border();
-                previewBorder.Background = new SolidColorBrush(Windows.UI.Colors.LightBlue);
-                previewBorder.SetValue(Grid.ColumnProperty, x + piece.Position.X);
-                previewBorder.SetValue(Grid.RowProperty, y + piece.Position.Y);
-                gridPlayer1.Children.Add(previewBorder);
+                Rectangle rectangleFollowing = this.gridElements[piece.Position.Y, piece.Position.X];
+                rectangleFollowing.Fill = new SolidColorBrush(Windows.UI.Colors.Blue);
             }
         }
 
         private void removePreview()
         {
-            foreach (Border border in this.gridPlayer1.Children)
+            foreach (Rectangle rectangle in this.gridPlayer1.Children)
             { 
-                border.Background = new SolidColorBrush(Windows.UI.Colors.Transparent);
+                rectangle.Fill = new SolidColorBrush(Windows.UI.Colors.Transparent);
             }
         }
 
