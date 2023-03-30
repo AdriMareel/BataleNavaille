@@ -142,14 +142,35 @@ namespace BatailleTest
                     gridHitPlayer1.Children.Add(rectangleHit);
 
                     //set event listeners
-                    rectangleBoat.PointerEntered += Grid_PointerEntered;
-                    rectangleBoat.Tapped += Grid_Tapped;
-                    rectangleBoat.RightTapped += Rectangle_RightTapped;
+                    rectangleBoat.PointerEntered += GridBoat_PointerEntered;
+                    rectangleBoat.Tapped += GridBoat_Tapped;
+                    rectangleBoat.RightTapped += RectangleBoat_RightTapped;
+
+                    rectangleHit.PointerEntered += GridHit_PointerEntered;
+                    rectangleHit.Tapped += GridHit_Tapped;
+                    rectangleHit.RightTapped += RectangleHit_RightTapped;
+
+
                 }
             }
         }
 
-        private void Rectangle_RightTapped(object sender, RightTappedRoutedEventArgs e)
+        private void GridHit_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void RectangleHit_RightTapped(object sender, RightTappedRoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void GridHit_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void RectangleBoat_RightTapped(object sender, RightTappedRoutedEventArgs e)
         {
             this.vertical = !this.vertical;
 
@@ -163,7 +184,7 @@ namespace BatailleTest
             this.generatePreview(x, y);
         }
 
-        private void Grid_Tapped(object sender, TappedRoutedEventArgs e)
+        private void GridBoat_Tapped(object sender, TappedRoutedEventArgs e)
         {
             Rectangle rectangle = sender as Rectangle;
 
@@ -210,7 +231,7 @@ namespace BatailleTest
         }
 
 
-        private void Grid_PointerEntered(object sender, PointerRoutedEventArgs e)
+        private void GridBoat_PointerEntered(object sender, PointerRoutedEventArgs e)
         {
             Rectangle rectangle = sender as Rectangle;
             rectangle.Fill = new SolidColorBrush(Windows.UI.Colors.LightBlue);
