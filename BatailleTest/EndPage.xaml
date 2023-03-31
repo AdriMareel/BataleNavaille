@@ -17,10 +17,17 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition x:Name="HeightGrid" Height="400px"/>
+            <RowDefinition Height="3*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock x:Name="winnerText"/>
+        <TextBlock x:Name="winnerText" Grid.Row="0" Grid.Column="1" />
+        <Grid x:Name="GifGrid"  Grid.Row="1" Grid.Column="1">
+            <Grid.Background>
+                <ImageBrush ImageSource="/Assets/defeat.gif"/>
+            </Grid.Background>
+        </Grid>
+        <Button x:Name="restartButton" Grid.Row="2" Grid.Column="1" Content="Rejouer une partie" Click="playAgain" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <MediaPlayerElement x:Name="MediaPlayer" Source="/Assets/defeat.mp3" AutoPlay="True" />
     </Grid>
 </Page>

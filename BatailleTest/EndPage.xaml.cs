@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 namespace BatailleTest
@@ -45,6 +46,11 @@ namespace BatailleTest
             if (winner == game.Player1)
             {
                 winnerText.Text = "Vous avez gagné !";
+                //MediaPlayerElement.MediaPlayer.Source = new Uri("ms-appx:///Assets/victory.mp3");
+
+                ImageBrush brush = new ImageBrush();
+                brush.ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/myimage.png"));
+                GifGrid.Background = brush;
             }
             else if (winner == game.Player2)
             {
