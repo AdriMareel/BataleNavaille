@@ -36,7 +36,7 @@ namespace BatailleTest
 
             var parameters = e.Parameter;
 
-             game = (Game.Game)parameters;
+             this.game = (Game.Game)parameters;
             
         }
 
