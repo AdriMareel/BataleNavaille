@@ -367,6 +367,11 @@ namespace BatailleTest
         }
         private void startBtn_Click(object sender, RoutedEventArgs e)
         {
+            //do not display these buttons anymore
+            this.startBtn.Visibility = Visibility.Collapsed;
+            this.randomBtn.Visibility = Visibility.Collapsed;
+            this.clearBtn.Visibility = Visibility.Collapsed;
+            
             this.game.Start();
             this.gameStatus.Text = "Your turn !";
         }
