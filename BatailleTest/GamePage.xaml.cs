@@ -178,6 +178,7 @@ namespace BatailleTest
             this.game.PlayTurn(coord, this.player1, this.vertical);
 
             this.refreshPlayerHitView();
+            this.refreshBoatView();
         }
 
         private void RectangleHit_RightTapped(object sender, RightTappedRoutedEventArgs e)
@@ -262,7 +263,7 @@ namespace BatailleTest
             //affichage hits joueur1
             foreach (Hit hit in this.player2.PlayerShots)
             {
-                Rectangle rectangle = this.gridHitElements[hit.Position.Y, hit.Position.X];
+                Rectangle rectangle = this.gridBoatElements[hit.Position.Y, hit.Position.X];
 
                 SolidColorBrush color = new SolidColorBrush(Windows.UI.Colors.White);
 
@@ -280,6 +281,8 @@ namespace BatailleTest
                 {
                     color = new SolidColorBrush(Windows.UI.Colors.IndianRed);
                 }
+                rectangle.Fill = color;
+                rectangle.Stroke = color;
             }
         }
 
