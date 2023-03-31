@@ -269,17 +269,17 @@ namespace BatailleTest
 
                 if (hit.Status == Hit.StatusType.miss)
                 {
-                    color = new SolidColorBrush(Windows.UI.Colors.BlueViolet);
+                    color = new SolidColorBrush(Windows.UI.Colors.LightCyan);
                 }
                 else
                 if (hit.Status == Hit.StatusType.hit)
                 {
-                    color = new SolidColorBrush(Windows.UI.Colors.DarkRed);
+                    color = new SolidColorBrush(Windows.UI.Colors.IndianRed);
                 }
                 else
                 if (hit.Status == Hit.StatusType.sunk)
                 {
-                    color = new SolidColorBrush(Windows.UI.Colors.IndianRed);
+                    color = new SolidColorBrush(Windows.UI.Colors.DarkRed);
                 }
                 rectangle.Fill = color;
                 rectangle.Stroke = color;
@@ -302,16 +302,16 @@ namespace BatailleTest
 
                 if(hit.Status == Hit.StatusType.miss)
                 {
-                    color = new SolidColorBrush(Windows.UI.Colors.BlueViolet);
+                    color = new SolidColorBrush(Windows.UI.Colors.LightCyan);
                 }
                 else 
                 if(hit.Status == Hit.StatusType.hit)
                 {
-                    color = new SolidColorBrush(Windows.UI.Colors.DarkRed);
+                    color = new SolidColorBrush(Windows.UI.Colors.IndianRed);
                 }else
                 if(hit.Status == Hit.StatusType.sunk)
                 {
-                    color = new SolidColorBrush(Windows.UI.Colors.IndianRed);
+                    color = new SolidColorBrush(Windows.UI.Colors.DarkRed);
                 }
 
                 rectangle.Fill = color;
