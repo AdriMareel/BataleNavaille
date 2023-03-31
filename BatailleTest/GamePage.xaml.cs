@@ -433,8 +433,19 @@ namespace BatailleTest
         {
             Frame rootFrame = Window.Current.Content as Frame;
 
-            
-            rootFrame.Navigate(typeof(EndPage), this.game);
+            var winner = this.game.GetWinner();
+            Debug.WriteLine(winner.Name);
+            bool isWon = false;
+            if (winner == this.player1)
+            {
+                isWon = true;
+            }
+            else if (winner == this.player2)
+            {
+                isWon = false;
+            }
+
+            rootFrame.Navigate(typeof(EndPage), isWon);
         }
     }
 }

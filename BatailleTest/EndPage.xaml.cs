@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
+using System.Diagnostics;
 
 namespace BatailleTest
 {
@@ -24,35 +25,34 @@ namespace BatailleTest
     public sealed partial class EndPage : Page
     {
         Game.Game game;
-        public EndPage()
-        {
-            this.InitializeComponent();
-            displayEndGame();
-        }
-
+        bool isWon;
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
 
             var parameters = e.Parameter;
 
-             game = (Game.Game)parameters;
-            
+            bool isWon = (bool)parameters;
+        }
+
+        public EndPage()
+        {
+            this.InitializeComponent();
+            displayEndGame();
         }
 
         public void displayEndGame()
         {
-            Player winner = this.game.GetWinner();
-            if (winner == game.Player1)
+            if (this.isWon)
             {
                 winnerText.Text = "Vous avez gagné !";
                 //MediaPlayerElement.MediaPlayer.Source = new Uri("ms-appx:///Assets/victory.mp3");
 
                 ImageBrush brush = new ImageBrush();
-                brush.ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/myimage.png"));
+                brush.ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/victory.gif"));
                 GifGrid.Background = brush;
             }
-            else if (winner == game.Player2)
+            else
             {
                 winnerText.Text = "Vous avez perdu !";
             }
