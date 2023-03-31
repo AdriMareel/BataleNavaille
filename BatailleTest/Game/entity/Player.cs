@@ -278,13 +278,15 @@ namespace BatailleTest.Game.entity
         {
 
             //check if the number of shot is not greater than the number of shot allowed (map size)²
-            if(_playerShots.Count >= (rules.MapSize^2))
+            if(_playerShots.Count >= (rules.MapSize * rules.MapSize))
             {
+                Debug.WriteLine("The number of shot is greater than the number of shot allowed");
                 return Hit.StatusType.notValid;
             }
             //check if the shot is not out of the board
             if(coords.X < 0 || coords.Y < 0 || coords.X >= rules.MapSize || coords.Y >= rules.MapSize)
             {
+                Debug.WriteLine("The shot is out of the board");
                 return Hit.StatusType.notValid;
             }
             //check if the shot is not already done
@@ -292,6 +294,7 @@ namespace BatailleTest.Game.entity
             {
                 if(hitTmp.Position == coords)
                 {
+                    Debug.WriteLine("The shot is already done");
                     return Hit.StatusType.notValid;
                 }
             }

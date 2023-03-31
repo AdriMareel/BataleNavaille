@@ -3,6 +3,7 @@ using BatailleTest.utils;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -299,7 +300,7 @@ namespace BatailleTest.Game
                 {
                     return false;
                 }
-                    return true;
+                return true;
             }
             else if(_currentPlayer == _player2)
             {
@@ -309,7 +310,9 @@ namespace BatailleTest.Game
                 }
                 return true;
             }
-            else { return true; }
+            else {
+                return true; 
+            }
 
         }
 
