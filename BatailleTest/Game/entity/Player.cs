@@ -326,13 +326,18 @@ namespace BatailleTest.Game.entity
             return status;
         }
 
-        /*public string AutoShot(GameRules rules, Board ennemyBoard)
+        public Hit.StatusType AutoShot(GameRules rules, Board ennemyBoard)
         {
-            // shoots at a random coordinate and takes
-            var possibleShoot = {x}
-            
-            List <Hit> hits = new List<Hit>();
-            return AddShot(coords, rules, ennemyBoard);
-        }*/
+            Hit.StatusType status = Hit.StatusType.Unknown;
+            do
+            {
+                Coordinates coord = new Coordinates();
+                coord.Randomize();
+                status = this.AddShot(coord, rules, ennemyBoard);
+            }
+            while (status == Hit.StatusType.notValid);
+
+            return status;
+        }
     }
 }
