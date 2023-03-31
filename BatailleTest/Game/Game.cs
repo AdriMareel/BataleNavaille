@@ -219,14 +219,21 @@ namespace BatailleTest.Game
                 {
                     if (player == _currentPlayer)
                     {
-                        if (this.AddAShot(coordinates))
+                        if(player == this.Player1)
                         {
-                            this.NextTurn();
-                            this._currentPlayer.AutoShot(this.GameRules, this._playerOneBoard);
+                            if (this.AddAShot(coordinates))
+                            {
+                                this.NextTurn();
+                            }
+                            else
+                            {
+                                return 10;
+                            }
                         }
                         else
                         {
-                            return 10;
+                            this._currentPlayer.AutoShot(this.GameRules, this._playerOneBoard);
+                            this.NextTurn();
                         }
                     }
                     else
