@@ -16,6 +16,8 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 using System.Diagnostics;
+using Windows.Media.Core;
+using Windows.Media.Playback;
 
 namespace BatailleTest
 {
@@ -24,7 +26,6 @@ namespace BatailleTest
     /// </summary>
     public sealed partial class EndPage : Page
     {
-        Game.Game game;
         bool isWon;
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -32,13 +33,13 @@ namespace BatailleTest
 
             var parameters = e.Parameter;
 
-            bool isWon = (bool)parameters;
+            this.isWon = (bool)parameters;
+            displayEndGame();
         }
 
         public EndPage()
         {
             this.InitializeComponent();
-            displayEndGame();
         }
 
         public void displayEndGame()
@@ -46,7 +47,7 @@ namespace BatailleTest
             if (this.isWon)
             {
                 winnerText.Text = "Vous avez gagné !";
-                //MediaPlayerElement.MediaPlayer.Source = new Uri("ms-appx:///Assets/victory.mp3");
+                MediaPlayer.Source = new MediaPlaybackItem(MediaSource.CreateFromUri(new Uri("ms-appx:///Assets/victory.mp3")));
 
                 ImageBrush brush = new ImageBrush();
                 brush.ImageSource = new BitmapImage(new Uri("ms-appx:///Assets/victory.gif"));

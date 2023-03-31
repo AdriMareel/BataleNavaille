@@ -58,10 +58,13 @@ namespace BatailleTest
 
             this.player1Name.Text = namePlayer1;
             this.player2Name.Text = namePlayer2;
+
+           
         }
         
         public GamePage()
         {
+
             this.InitializeComponent();
 
             //init variables
@@ -429,13 +432,13 @@ namespace BatailleTest
             this.refreshPlayerHitView();
         }
 
-        private void navigateToEndPage()
+        private void navigateToEndPage(bool isWon = true)
         {
             Frame rootFrame = Window.Current.Content as Frame;
 
+            
             var winner = this.game.GetWinner();
-            Debug.WriteLine(winner.Name);
-            bool isWon = false;
+            
             if (winner == this.player1)
             {
                 isWon = true;
@@ -444,6 +447,7 @@ namespace BatailleTest
             {
                 isWon = false;
             }
+            
 
             rootFrame.Navigate(typeof(EndPage), isWon);
         }
