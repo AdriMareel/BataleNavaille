@@ -323,6 +323,11 @@ namespace BatailleTest
 
         private void GridBoat_PointerEntered(object sender, PointerRoutedEventArgs e)
         {
+            if (this.game.isGameStarted())
+            {
+                return;
+            }
+
             Rectangle rectangle = sender as Rectangle;
             rectangle.Fill = new SolidColorBrush(Windows.UI.Colors.Orange);
             rectangle.Stroke = new SolidColorBrush(Windows.UI.Colors.Orange);
