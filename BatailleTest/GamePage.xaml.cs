@@ -156,8 +156,7 @@ namespace BatailleTest
                     rectangleHit.PointerEntered += GridHit_PointerEntered;
                     rectangleHit.Tapped += GridHit_Tapped;
                     rectangleHit.RightTapped += RectangleHit_RightTapped;
-
-
+                    this.gridHitPlayer1.PointerExited += GridHit_Exited;
                 }
             }
         }
@@ -374,6 +373,11 @@ namespace BatailleTest
             
             this.game.Start();
             this.gameStatus.Text = "Your turn !";
+        }
+
+        private void GridHit_Exited(object sender, PointerRoutedEventArgs e)
+        {
+            this.refreshPlayerHitView();
         }
     }
 }
