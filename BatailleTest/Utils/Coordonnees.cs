@@ -118,7 +118,7 @@ namespace BatailleTest.utils
         /// <param name="min">  (Optional) The minimum. </param>
         /// <param name="max">  (Optional) The maximum. </param>
 
-        public void Randomize(int min = 0, int max = 9)
+        public void Randomize(int min = 0, int max = 10)
         {
             Random rnd = new Random();
             _x = rnd.Next(min, max);
