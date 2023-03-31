@@ -180,6 +180,11 @@ namespace BatailleTest
 
             this.refreshPlayerHitView();
             this.refreshBoatView();
+
+            if (this.game.IsOver())
+            {
+                this.navigateToEndPage();
+            }
         }
 
         private void RectangleHit_RightTapped(object sender, RightTappedRoutedEventArgs e)
