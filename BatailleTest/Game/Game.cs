@@ -135,6 +135,12 @@ namespace BatailleTest.Game
             get { return _playerTwoBoard; }
         }
 
+        public GameStates GameStates
+        {
+            get { return _gameState; }
+            set { _gameState = value; }
+        }
+
         public int Start()
         {
             if (Player1.GetMissingBoat(_gameRules).Count == 0 && Player2.GetMissingBoat(_gameRules).Count == 0)

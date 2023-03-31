@@ -45,6 +45,7 @@ namespace BatailleTest
         private bool[,] botBoatsCoords = new bool[10, 10];
         private bool[,] playerBoatsCoords = new bool[10, 10];
         private bool vertical = true;
+        public string GameState = "Boat placing !";
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -74,6 +75,7 @@ namespace BatailleTest
             this.botBoatsCoords = getAIBoatsCoords(player2);
             this.gridBoatPlayer1 = gamePlayer1;
             this.gridHitPlayer1 = gamePlayer2;
+
 
             initGridsView(this.gridBoatPlayer1, this.gridHitPlayer1, this.botBoatsCoords);
 
@@ -365,7 +367,8 @@ namespace BatailleTest
         }
         private void startBtn_Click(object sender, RoutedEventArgs e)
         {
-            this.game.Start(); 
+            this.game.Start();
+            this.gameStatus.Text = "Your turn !";
         }
     }
 }
