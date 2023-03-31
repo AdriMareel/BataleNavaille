@@ -13,6 +13,7 @@ using Windows.Devices.Display.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Media.Protection;
+using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -185,13 +186,15 @@ namespace BatailleTest
 
         private void GridHit_PointerEntered(object sender, PointerRoutedEventArgs e)
         {    
-            if(!this.game.isGameStarted())
+            if(!this.game.isGameStarted() && this.game.CurrentPlayer == this.game.Player1)
             {
                 return;
             }
-            
+
+            this.refreshPlayerHitView();
+                
             Rectangle rectangle = sender as Rectangle;
-            rectangle.Fill = new SolidColorBrush(Windows.UI.Colors.Yellow);
+            rectangle.Fill = new SolidColorBrush(Windows.UI.Colors.DarkCyan);
         }
 
         private void RectangleBoat_RightTapped(object sender, RightTappedRoutedEventArgs e)
@@ -257,8 +260,14 @@ namespace BatailleTest
 
         private void refreshPlayerHitView()
         {
+            foreach (Rectangle rec in this.gridHitElements)
+            {
+                rec.Fill = new SolidColorBrush(Windows.UI.Colors.LightBlue);
+                rec.Stroke = new SolidColorBrush(Windows.UI.Colors.White);
+            }
             foreach(Hit hit in this.boardPlayer1.PlayerShots)
             {
+
                 Rectangle rectangle = this.gridHitElements[hit.Position.Y, hit.Position.X];
 
                 SolidColorBrush color = new SolidColorBrush(Windows.UI.Colors.White);
@@ -271,6 +280,10 @@ namespace BatailleTest
                 if(hit.Status == Hit.StatusType.hit)
                 {
                     color = new SolidColorBrush(Windows.UI.Colors.DarkRed);
+                }else
+                if(hit.Status == Hit.StatusType.sunk)
+                {
+                    color = new SolidColorBrush(Windows.UI.Colors.IndianRed);
                 }
 
                 rectangle.Fill = color;

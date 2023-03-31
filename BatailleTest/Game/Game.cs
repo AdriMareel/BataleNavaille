@@ -303,7 +303,7 @@ namespace BatailleTest.Game
                 }
                 return true;
             }
-            else { return false; }
+            else { return true; }
 
         }
 
