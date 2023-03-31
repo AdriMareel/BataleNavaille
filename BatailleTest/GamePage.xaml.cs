@@ -418,5 +418,13 @@ namespace BatailleTest
         {
             this.refreshPlayerHitView();
         }
+
+        private void navigateToEndPage()
+        {
+            Frame rootFrame = Window.Current.Content as Frame;
+
+            
+            rootFrame.Navigate(typeof(EndPage), this.game);
+        }
     }
 }
