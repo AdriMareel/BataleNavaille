@@ -58,5 +58,11 @@ namespace BatailleTest
             }
             
         }
+
+        private void restartButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame rootFrame = Window.Current.Content as Frame;
+            rootFrame.Navigate(typeof(MainPage));
+        }
     }
 }
