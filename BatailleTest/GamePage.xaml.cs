@@ -165,6 +165,7 @@ namespace BatailleTest
         {
             if (!this.game.isGameStarted())
             {
+                this.gameStatus.Text = "Slow down Captain! War hasn't started yet!";
                 return;
             }
             Rectangle rectangle = sender as Rectangle;
@@ -192,7 +193,6 @@ namespace BatailleTest
             {
                 return;
             }
-
             this.refreshPlayerHitView();
                 
             Rectangle rectangle = sender as Rectangle;
@@ -323,6 +323,11 @@ namespace BatailleTest
 
         private void GridBoat_PointerEntered(object sender, PointerRoutedEventArgs e)
         {
+            if (this.game.isGameStarted())
+            {
+                return;
+            }
+
             Rectangle rectangle = sender as Rectangle;
             rectangle.Fill = new SolidColorBrush(Windows.UI.Colors.Orange);
             rectangle.Stroke = new SolidColorBrush(Windows.UI.Colors.Orange);
@@ -406,7 +411,7 @@ namespace BatailleTest
                 this.clearBtn.Visibility = Visibility.Collapsed;
             
                 this.game.Start();
-                this.gameStatus.Text = "Your turn !";
+                this.gameStatus.Text = "Your turn! Destroy the ennemy!";
             }
             else
             {
