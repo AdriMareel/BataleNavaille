@@ -224,6 +224,8 @@ namespace BatailleTest.Game
                             if (this.AddAShot(coordinates))
                             {
                                 this.NextTurn();
+                                Debug.WriteLine("player played");
+                                this.PlayTurn(coordinates);
                             }
                             else
                             {
@@ -234,6 +236,7 @@ namespace BatailleTest.Game
                         {
                             this._currentPlayer.AutoShot(this.GameRules, this._playerOneBoard);
                             this.NextTurn();
+                            Debug.WriteLine("bot played");
                         }
                     }
                     else
