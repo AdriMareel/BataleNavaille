@@ -221,8 +221,8 @@ namespace BatailleTest.Game
                     {
                         if (this.AddAShot(coordinates))
                         {
-                            this.SwitchPlayer();
                             this.NextTurn();
+                            this._currentPlayer.AutoShot(this.GameRules, this._playerOneBoard);
                         }
                         else
                         {
@@ -311,7 +311,7 @@ namespace BatailleTest.Game
                 return true;
             }
             else {
-                return true; 
+                return false; 
             }
 
         }
