@@ -336,6 +336,11 @@ namespace BatailleTest
 
         private void generatePreview(int x, int y)
         {
+            if (this.game.isGameStarted())
+            {
+                return;
+            }
+
             removePreview();
             // Obtenir la liste des bateaux manquants pour le joueur 1
             List<Ship> missingBoatsPlayer = this.player1.GetMissingBoat(gameRules);
