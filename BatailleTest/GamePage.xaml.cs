@@ -390,13 +390,20 @@ namespace BatailleTest
         }
         private void startBtn_Click(object sender, RoutedEventArgs e)
         {
-            //do not display these buttons anymore
-            this.startBtn.Visibility = Visibility.Collapsed;
-            this.randomBtn.Visibility = Visibility.Collapsed;
-            this.clearBtn.Visibility = Visibility.Collapsed;
+            if (this.game.CurrentPlayer.GetMissingBoat(this.game.GameRules).Count() == 0)
+            {
+                //do not display these buttons anymore
+                this.startBtn.Visibility = Visibility.Collapsed;
+                this.randomBtn.Visibility = Visibility.Collapsed;
+                this.clearBtn.Visibility = Visibility.Collapsed;
             
-            this.game.Start();
-            this.gameStatus.Text = "Your turn !";
+                this.game.Start();
+                this.gameStatus.Text = "Your turn !";
+            }
+            else
+            {
+                this.gameStatus.Text = "You have not placed all your boats ! The game can't start !";
+            }
         }
 
         private void GridHit_Exited(object sender, PointerRoutedEventArgs e)
