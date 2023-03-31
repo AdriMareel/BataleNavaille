@@ -165,6 +165,7 @@ namespace BatailleTest
         {
             if (!this.game.isGameStarted())
             {
+                this.gameStatus.Text = "Slow down Captain! War hasn't started yet!";
                 return;
             }
             Rectangle rectangle = sender as Rectangle;
@@ -177,6 +178,7 @@ namespace BatailleTest
             Coordinates coord = new Coordinates(x, y);
             this.game.PlayTurn(coord, this.player1, this.vertical);
 
+            this.gameStatus.Text = "Your turn !";
             this.refreshPlayerHitView();
             this.refreshBoatView();
         }
@@ -275,11 +277,13 @@ namespace BatailleTest
                 if (hit.Status == Hit.StatusType.hit)
                 {
                     color = new SolidColorBrush(Windows.UI.Colors.DarkRed);
+                    this.gameStatus.Text = "Your opponent hit one of your boats! Retaliate Captain!";
                 }
                 else
                 if (hit.Status == Hit.StatusType.sunk)
                 {
                     color = new SolidColorBrush(Windows.UI.Colors.IndianRed);
+                    this.gameStatus.Text = "One of your ships got sunk! A moment of silence for your crew...";
                 }
                 rectangle.Fill = color;
                 rectangle.Stroke = color;
@@ -308,10 +312,12 @@ namespace BatailleTest
                 if(hit.Status == Hit.StatusType.hit)
                 {
                     color = new SolidColorBrush(Windows.UI.Colors.DarkRed);
+                    this.gameStatus.Text = "You hit an opponents boat! Keep it going!";
                 }else
                 if(hit.Status == Hit.StatusType.sunk)
                 {
                     color = new SolidColorBrush(Windows.UI.Colors.IndianRed);
+                    this.gameStatus.Text = "You sunk an opponents boat! Good job!";
                 }
 
                 rectangle.Fill = color;
