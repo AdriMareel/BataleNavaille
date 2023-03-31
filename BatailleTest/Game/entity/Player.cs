@@ -310,6 +310,17 @@ namespace BatailleTest.Game.entity
                         if(ship.Life == 1)
                         {
                             status = Hit.StatusType.sunk;
+
+                            foreach (ShipPiece piece2 in ship.ShipPieces)
+                            {
+                                foreach (Hit currentHit in _playerShots)
+                                {
+                                    if (currentHit.Position == piece2.Position)
+                                    {
+                                        currentHit.Status = Hit.StatusType.sunk;
+                                    }
+                                }
+                            }
                         }
                         else
                         {

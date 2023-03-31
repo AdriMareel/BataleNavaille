@@ -63,6 +63,7 @@ namespace BatailleTest.Game.entity
         public StatusType Status
         {
             get { return _status; }
+            set { _status = value; }
         }
 
         public int Score
